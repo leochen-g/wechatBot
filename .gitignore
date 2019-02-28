@@ -1,0 +1,15 @@
+*/.settings
+*/target
+*target
+*/.settings
+*/target
+*.project
+*.classpath
+*.idea
+*.iml
+*.DS_Store
+/build/
+/bin/
+*node_modules
+*/log
+.env
