@@ -7,5 +7,5 @@ module.exports ={
   MEMORIAL_DAY:'2015/04/18', //你和收信者的纪念日
   NAME:'Leo_chen',//备注姓名
   NICKNAME:'Leo_chen', //昵称
-  SENDDATE:'30 * * * * *',//定时发送时间，规则见 /schedule/index.js
+  SENDDATE:'30 15 8 * * *',//定时发送时间 每天8点15分30秒发送，规则见 /schedule/index.js
 }
