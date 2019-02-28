@@ -2,7 +2,7 @@ const superagent = require('../config/superagent')
 const config = require('../config/index')
 const cheerio = require('cheerio')
 
-async function getOne() {
+async function getOne() { // 获取每日一句
   let res = await superagent.req(config.ONE,'GET')
   let $ = cheerio.load(res.text)
   let todayOneList = $('#carousel-one .carousel-inner .item')
@@ -10,7 +10,7 @@ async function getOne() {
   return todayOne;
 }
 
-async function getWeather() {
+async function getWeather() { //获取墨迹天气
   let url = config.MOJI_HOST+config.CITY+'/'+config.LOCATION
   let res = await superagent.req(url,'GET')
   let $ = cheerio.load(res.text)
