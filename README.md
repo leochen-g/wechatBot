@@ -60,6 +60,7 @@ index.js
     const config = require('./config/index')
     const untils = require('./untils/index')
     const superagent = require('./superagent/index')
+    const {FileBox} = require('file-box') //文件读取模块
     //  二维码生成
     function onScan (qrcode, status) {
       require('qrcode-terminal').generate(qrcode)  // 在console端显示二维码
@@ -84,29 +85,36 @@ index.js
     function onLogout(user) {
       console.log(`${user} 登出`)
     }
-    // 自动加群功能
+    // 监听对话 根据关键词自动加群
     async function onMessage (msg) {
       const contact = msg.from() // 发消息人
       const content = msg.text() //消息内容
       const room = msg.room() //是否是群消息
-      if(room){
-        console.log(`群名: ${room.topic()} 发消息人: ${contact.name()} 内容: ${content}`)
-      }else {
-    	console.log(`发消息人: ${contact.name()} 消息内容: ${content}`)
-      }
+      const roomCodeUrl = FileBox.fromUrl(config.ROOMCODEURL) //来自url的文件
+      const roomCodeLocal = FileBox.fromFile(config.ROOMLOCALPATH) //添加本地文件
       if (msg.self()) {
     	return
       }
-      if(/微信每日说|每日说|微信机器人/.test(content)){
-    	let keyRoom = await this.Room.find({topic: /^微信每日说/i})
-    	if(keyRoom){
-    	  try{
-    		await keyRoom.add(contact)
-    		await keyRoom.say('微信每日说：欢迎新朋友 ', contact)
-    	  }catch (e) {
-    		console.error(e)
+      if(room){ // 如果是群消息
+    	const topic = await room.topic()
+        console.log(`群名: ${topic} 发消息人: ${contact.name()} 内容: ${content}`)
+      }else { // 如果非群消息
+    	console.log(`发消息人: ${contact.name()} 消息内容: ${content}`)
+    	let addRoomReg = eval(config.ADDROOMWORD)
+    	let roomReg = eval(config.ROOMNAME)
+    	if(addRoomReg.test(content)&&!room){
+    	  let keyRoom = await this.Room.find({topic: roomReg})
+    	  if(keyRoom){
+    		try{
+    		  await contact.say(roomCodeLocal||roomCodeUrl)
+    		  await keyRoom.say('微信每日说：欢迎新朋友', contact)
+    		}catch (e) {
+    		  console.error(e)
+    		}
     	  }
-    
+    	}else {
+    	  await contact.say('你好，不要轻易调戏我，我只会发群二维码，不会聊天的！')
+    	  await contact.say('请回复暗号：加群  获取群二维码图片')
     	}
       }
     }
@@ -126,14 +134,14 @@ index.js
     		 * and accept this request by `request.accept()`
     		 */
     	  case Friendship.Type.Receive:
-    		if (/微信每日说|微信机器人|微信|每日说/i.test(friendship.hello())) {
+    	    let addFriendReg = eval(config.ADDFRIENDWORD)
+    		if (addFriendReg.test(friendship.hello())) {
     		  logMsg = '自动添加好友，因为验证信息中带关键字‘每日说’'
     		  await friendship.accept()
     		} else {
     		  logMsg = '没有通过验证 ' + friendship.hello()
     		}
     		break
-    
     		/**
     		 *
     		 * 2. Friend Ship Confirmed
@@ -171,6 +179,7 @@ index.js
     bot.start()
     	.then(() => console.log('开始登陆微信'))
     	.catch(e => console.error(e))
+
 
 
 superagent/index.js
@@ -238,17 +247,22 @@ yarn
 wechatBot/config/index.js
 
     // 配置文件
-    // 配置文件
     module.exports ={
-       ONE:'http://wufazhuce.com/',//ONE的web版网站
-       MOJI_HOST:'https://tianqi.moji.com/weather/china/', //中国墨迹天气url
-       CITY:'shanghai',//收信者所在城市
-       LOCATION:'pudong-new-district',//收信者所在区
-       MEMORIAL_DAY:'2015/04/18', //你和收信者的纪念日
-       NAME:'Leo_chen',//微信备注姓名
-       NICKNAME:'Leo_chen', //微信昵称
-       SENDDATE:'30 * * * * *',//定时发送时间，规则见 /schedule/index.js
+      ONE:'http://wufazhuce.com/',////ONE的web版网站
+      MOJI_HOST:'https://tianqi.moji.com/weather/china/', //中国墨迹天气url
+      CITY:'shanghai',//收信者所在城市
+      LOCATION:'pudong-new-district',//收信者所在区 （可以访问墨迹天气网站后，查询区的英文拼写）
+      MEMORIAL_DAY:'2015/04/18', //你和收信者的纪念日
+      NAME:'Leo_chen',//备注姓名
+      NICKNAME:'Leo_chen', //昵称
+      SENDDATE:'30 15 8 * * *',//定时发送时间 每天8点15分30秒发送，规则见 /schedule/index.js
+      ROOMNAME:'/^微信每日说/i', //群名(请只修改中文，不要删除符号，这是正则)
+      ADDFRIENDWORD:'/微信每日说/i',//自动加好友触发的关键词(请只修改中文，不要删除符号，这是正则)
+      ADDROOMWORD:'/加群/',//自动发送群图片触发关键词(请只修改中文，不要删除符号，这是正则)
+      ROOMCODEURL:'http://image.bloggeng.com/qun.png',//群二维码url链接(与本地群二维码路径选填一个)
+      ROOMLOCALPATH:'./static/qun.png',//本地群二维码图片路径（与群url选填一个）
     }
+
 开始运行
 
     npm run start
