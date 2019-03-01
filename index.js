@@ -32,31 +32,35 @@ async function onLogin (user) {
 function onLogout(user) {
   console.log(`${user} 登出`)
 }
-// 自动加群功能
+// 监听对话 根据关键词自动加群
 async function onMessage (msg) {
   const contact = msg.from() // 发消息人
   const content = msg.text() //消息内容
   const room = msg.room() //是否是群消息
-  // const roomCode = FileBox.fromUrl('http://image.bloggeng.com/qun.png') //来自url的文件
-  const roomCodeLocal = FileBox.fromFile('./static/qun.png') //添加本地文件
+  const roomCodeUrl = FileBox.fromUrl(config.ROOMCODEURL) //来自url的文件
+  const roomCodeLocal = FileBox.fromFile(config.ROOMLOCALPATH) //添加本地文件
   if (msg.self()) {
 	return
   }
-  if(room){
-    console.log(`群名: ${room.topic()} 发消息人: ${contact.name()} 内容: ${content}`)
-  }else {
+  if(room){ // 如果是群消息
+	const topic = await room.topic()
+    console.log(`群名: ${topic} 发消息人: ${contact.name()} 内容: ${content}`)
+  }else { // 如果非群消息
 	console.log(`发消息人: ${contact.name()} 消息内容: ${content}`)
-	if(/加群/.test(content)&&!room){
-	  let keyRoom = await this.Room.find({topic: /^微信每日说/i})
+	let addRoomReg = eval(config.ADDROOMWORD)
+	let roomReg = eval(config.ROOMNAME)
+	if(addRoomReg.test(content)&&!room){
+	  let keyRoom = await this.Room.find({topic: roomReg})
 	  if(keyRoom){
 		try{
-		  await contact.say(roomCodeLocal)
+		  await contact.say(roomCodeLocal||roomCodeUrl)
 		  await keyRoom.say('微信每日说：欢迎新朋友', contact)
 		}catch (e) {
 		  console.error(e)
 		}
-
 	  }
+	}else {
+	  await contact.say('请回复暗号：加群  获取群二维码图片')
 	}
   }
 }
@@ -76,14 +80,14 @@ async function onFriendShip(friendship) {
 		 * and accept this request by `request.accept()`
 		 */
 	  case Friendship.Type.Receive:
-		if (/微信每日说/i.test(friendship.hello())) {
+	    let addFriendReg = eval(config.ADDFRIENDWORD)
+		if (addFriendReg.test(friendship.hello())) {
 		  logMsg = '自动添加好友，因为验证信息中带关键字‘每日说’'
 		  await friendship.accept()
 		} else {
 		  logMsg = '没有通过验证 ' + friendship.hello()
 		}
 		break
-
 		/**
 		 *
 		 * 2. Friend Ship Confirmed

@@ -1,42 +1,42 @@
-# wechatBot
+## wechatBot
 微信每日说，每日自动发送微信消息给爱人
 
-# 项目介绍
+## 项目介绍
 
-## 灵感来源
+### 灵感来源
 在掘金看到了一篇[《用Node + EJS写一个爬虫脚本每天定时女朋友发一封暖心邮件》](https://juejin.im/post/5c75fa4af265da2d84109219)后，
 在评论区偶然看到一位读者说可不可以用微信实现一下。然后最近刚好在做微信机器人的小项目，那就把这个定时任务放到微信上去做吧，说干就干，撸了一下午终于撸出来了。
 ## 项目地址
 github:[https://github.com/gengchen528/wechatBot](https://github.com/gengchen528/wechatBot)
-## 使用库
+### 使用库
 * [wechaty](https://github.com/Chatie/wechaty) - 微信操作
 * [node-schedule](https://github.com/node-schedule/node-schedule) - 定时任务
 * [superagent](https://github.com/visionmedia/superagent) - 爬取页面信息
 * [cheerio](https://github.com/cheeriojs/cheerio#readme) - 抓取页面
 * [qrcode-terminal](https://github.com/gtanner/qrcode-terminal) - 终端显示二维码
-## 功能
+### 功能
 * 定时给朋友发送每日天气提醒以及每日一句
 * 根据关键词自动加好友和自动拉群功能
 * 后续继续扩展吧...(你有好的想法也可以提pr)
 
-## 数据来源
+### 数据来源
 * 每日一句和上面的大佬一样也是来自[one](http://wufazhuce.com/)
 * 天气信息来自[墨迹天气](https://tianqi.moji.com/weather)
 
-## 定时任务
+### 定时任务
 [node-schedule](https://github.com/node-schedule/node-schedule)非你莫属了，
 可以定时每个月、每个礼拜、每天具体什么时候执行什么任务
 
-## 实现效果
+### 实现效果
 由于是微信定时发送消息，较邮件来说，微信无法把图片和文字放在同一消息框中，所以美观度来说可能没有邮件好，不过文字进行排版后还是可以的，由于时间仓促，所以文字比较少，后续会继续增加内容；
 
 ![](https://user-gold-cdn.xitu.io/2019/2/28/16933e1817ce89f7?w=1136&h=702&f=png&s=157566)
 
 ![](https://user-gold-cdn.xitu.io/2019/2/28/16933e04e55a70c3?w=982&h=432&f=png&s=79574)
    
-# 代码说明
+## 代码说明
 
-## 目录结构
+### 目录结构
 
 ![](https://user-gold-cdn.xitu.io/2019/2/28/16933e8244c7d39a?w=628&h=650&f=png&s=77229)
 
@@ -45,7 +45,7 @@ github:[https://github.com/gengchen528/wechatBot](https://github.com/gengchen528
 * superagent: 获取每日一句和天气信息
 * untils: 抽取的共用方法
 
-## 核心代码
+### 核心代码
 
 index.js
 
@@ -213,7 +213,7 @@ superagent/index.js
     }
  
     
-# 项目运行
+## 项目运行
 
 由于需要安装chromium, 所以要先配置一下镜像
 
@@ -254,24 +254,30 @@ wechatBot/config/index.js
     npm run start
     然后掏出你的手机，最好使用小号，扫描控制台的二维码即可
 
-# 待解决问题
+## 待解决问题
 
 * 由于微信登录和邮件登录不同，所以无法使用进程守护工具，目前没有测试是否能够长时间登录
 * 因为node的原因，如果发生错误，可能会导致任务无法进行，需要手动重启并登录
 * 最好能够使用小号登录，如果是常用微信登录，在电脑客户端登陆后可能会wechaty挤掉
 * 墨迹天气页面在获取的时候可能会存在延时，有时可能获取不到
 
-# 后续功能
+## 后续功能
 
 * 为了防止占用你的微信号，你和你的爱人添加我的微信后。你发送指定内容，我将会每天帮你发送消息
 * 还有在思考中...（你有好的想法也可以提出来）
 
-# 最后
+## 最后
 
-因为给这个微信加了自动加好友和拉群功能，所以有兴趣的小伙伴可以加我的微信进行测试，记得在加好友的时候带上暗号：`微信每日说`，然后发送`微信每日说`我会把你拉到群中
+因为给这个微信加了自动加好友和拉群功能，所以有兴趣的小伙伴可以加我的微信进行测试，记得在加好友的时候带上暗号：`微信每日说`，加好友后发送`加群`，会自动发送群的二维码；
+
+**注意** 加好友请在验证中填写 `微信每日说`  才可以自动加好友
 
 ![](https://user-gold-cdn.xitu.io/2019/2/28/1693401c6c3e6b02?w=430&h=430&f=png&s=53609)
 
 赶快亲自试一试吧，相信你会挖掘出更多好玩的功能
 
 github:[https://github.com/gengchen528/wechatBot](https://github.com/gengchen528/wechatBot)
+
+另外我的公众号已经接入微软小冰，关注后发语音会有小姐姐的声音陪你聊天，也可以和她文字聊天，有兴趣可以试试看，单身的欢迎来撩
+
+![](https://user-gold-cdn.xitu.io/2019/3/1/169381d277ba6401?w=258&h=258&f=png&s=42373)
