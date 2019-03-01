@@ -7,6 +7,7 @@ const schedule = require('./schedule/index')
 const config = require('./config/index')
 const untils = require('./untils/index')
 const superagent = require('./superagent/index')
+const {FileBox} = require('file-box') //文件读取模块
 //  二维码生成
 function onScan (qrcode, status) {
   require('qrcode-terminal').generate(qrcode)  // 在console端显示二维码
@@ -36,24 +37,26 @@ async function onMessage (msg) {
   const contact = msg.from() // 发消息人
   const content = msg.text() //消息内容
   const room = msg.room() //是否是群消息
+  // const roomCode = FileBox.fromUrl('http://image.bloggeng.com/qun.png') //来自url的文件
+  const roomCodeLocal = FileBox.fromFile('./static/qun.png') //添加本地文件
+  if (msg.self()) {
+	return
+  }
   if(room){
     console.log(`群名: ${room.topic()} 发消息人: ${contact.name()} 内容: ${content}`)
   }else {
 	console.log(`发消息人: ${contact.name()} 消息内容: ${content}`)
-  }
-  if (msg.self()) {
-	return
-  }
-  if(/微信每日说|每日说|微信机器人/.test(content)){
-	let keyRoom = await this.Room.find({topic: /^微信每日说/i})
-	if(keyRoom){
-	  try{
-		await keyRoom.add(contact)
-		await keyRoom.say('微信每日说：欢迎新朋友 ', contact)
-	  }catch (e) {
-		console.error(e)
-	  }
+	if(/加群|微信每日说/.test(content)&&!room){
+	  let keyRoom = await this.Room.find({topic: /^微信每日说/i})
+	  if(keyRoom){
+		try{
+		  await contact.say(roomCodeLocal)
+		  await keyRoom.say('微信每日说：欢迎新朋友', contact)
+		}catch (e) {
+		  console.error(e)
+		}
 
+	  }
 	}
   }
 }
@@ -73,7 +76,7 @@ async function onFriendShip(friendship) {
 		 * and accept this request by `request.accept()`
 		 */
 	  case Friendship.Type.Receive:
-		if (/微信每日说|微信机器人|微信|每日说/i.test(friendship.hello())) {
+		if (/微信每日说/i.test(friendship.hello())) {
 		  logMsg = '自动添加好友，因为验证信息中带关键字‘每日说’'
 		  await friendship.accept()
 		} else {
