@@ -46,7 +46,7 @@ async function onMessage (msg) {
     console.log(`群名: ${room.topic()} 发消息人: ${contact.name()} 内容: ${content}`)
   }else {
 	console.log(`发消息人: ${contact.name()} 消息内容: ${content}`)
-	if(/加群|微信每日说/.test(content)&&!room){
+	if(/加群/.test(content)&&!room){
 	  let keyRoom = await this.Room.find({topic: /^微信每日说/i})
 	  if(keyRoom){
 		try{
