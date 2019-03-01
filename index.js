@@ -60,6 +60,7 @@ async function onMessage (msg) {
 		}
 	  }
 	}else {
+	  await contact.say('你好，不要轻易调戏我，我只会发群二维码，不会聊天的！')
 	  await contact.say('请回复暗号：加群  获取群二维码图片')
 	}
   }
