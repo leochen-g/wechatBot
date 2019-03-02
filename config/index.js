@@ -10,8 +10,8 @@ module.exports ={
   NAME:'A兔子',//备注姓名
   NICKNAME:'嗯哼', //昵称
   SENDDATE:'30 15 8 * * *',//定时发送时间 每天8点15分30秒发送，规则见 /schedule/index.js
-  ROOMNAME:'/^微信每日说/i', //群名(请只修改中文，不要删除符号，这是正则)
-  ADDFRIENDWORD:'/微信每日说/i',//自动加好友触发的关键词(请只修改中文，不要删除符号，这是正则)
+  ROOMNAME:'/^你的群名/i', //群名(请只修改中文，不要删除符号，这是正则)
+  ADDFRIENDWORD:'/你要触发的关键词/i',//自动加好友触发的关键词(请只修改中文，不要删除符号，这是正则)
   ADDROOMWORD:'/加群/',//自动发送群图片触发关键词(请只修改中文，不要删除符号，这是正则)
   ROOMCODEURL:'http://image.bloggeng.com/qun.png',//群二维码url链接(与本地群二维码路径选填一个)
   ROOMLOCALPATH:'./static/qun.png',//本地群二维码图片路径（与群url选填一个）
