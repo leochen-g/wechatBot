@@ -13,3 +13,5 @@
 *node_modules
 */log
 .env
+*.memory-card.json
+package-lock.json

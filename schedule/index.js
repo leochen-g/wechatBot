@@ -1,6 +1,7 @@
 const schedule = require('node-schedule')
 // date 参数
 
+//其他规则见 https://www.npmjs.com/package/node-schedule
 // 规则参数讲解    *代表通配符
 //
 // *  *  *  *  *  *
@@ -20,8 +21,6 @@ const schedule = require('node-schedule')
 // 每天的凌晨1点1分30秒触发 ：'30 1 1 * * *'
 //
 // 每月的1日1点1分30秒触发 ：'30 1 1 1 * *'
-//
-// 2016年的1月1日1点1分30秒触发 ：'30 1 1 1 2016 *'
 //
 // 每周1的1点1分30秒触发 ：'30 1 1 * * 1'
 

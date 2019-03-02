@@ -47,21 +47,23 @@ async function onMessage (msg) {
     console.log(`群名: ${topic} 发消息人: ${contact.name()} 内容: ${content}`)
   }else { // 如果非群消息
 	console.log(`发消息人: ${contact.name()} 消息内容: ${content}`)
-	let addRoomReg = eval(config.ADDROOMWORD)
-	let roomReg = eval(config.ROOMNAME)
-	if(addRoomReg.test(content)&&!room){
-	  let keyRoom = await this.Room.find({topic: roomReg})
-	  if(keyRoom){
-		try{
-		  await contact.say(roomCodeLocal||roomCodeUrl)
-		  await keyRoom.say('微信每日说：欢迎新朋友', contact)
-		}catch (e) {
-		  console.error(e)
+	if(config.AUTOADDROOM){ //判断是否开启自动加群功能
+	  let addRoomReg = eval(config.ADDROOMWORD)
+	  let roomReg = eval(config.ROOMNAME)
+	  if(addRoomReg.test(content)&&!room){
+		let keyRoom = await this.Room.find({topic: roomReg})
+		if(keyRoom){
+		  try{
+			await contact.say(roomCodeLocal||roomCodeUrl)
+			await keyRoom.say('微信每日说：欢迎新朋友', contact)
+		  }catch (e) {
+			console.error(e)
+		  }
 		}
+	  }else {
+		await contact.say('你好，不要轻易调戏我，我只会发群二维码，不会聊天的！')
+		await contact.say('请回复暗号：加群  获取群二维码图片')
 	  }
-	}else {
-	  await contact.say('你好，不要轻易调戏我，我只会发群二维码，不会聊天的！')
-	  await contact.say('请回复暗号：加群  获取群二维码图片')
 	}
   }
 }
@@ -82,7 +84,7 @@ async function onFriendShip(friendship) {
 		 */
 	  case Friendship.Type.Receive:
 	    let addFriendReg = eval(config.ADDFRIENDWORD)
-		if (addFriendReg.test(friendship.hello())) {
+		if (addFriendReg.test(friendship.hello())&&config.AUTOADDFRIEND) { //判断是否开启自动加好友功能
 		  logMsg = '自动添加好友，因为验证信息中带关键字‘每日说’'
 		  await friendship.accept()
 		} else {
@@ -105,17 +107,24 @@ async function onFriendShip(friendship) {
 }
 // 自动发消息功能
 async function main() {
+  let logMsg
   let  contact = await bot.Contact.find({name:config.NICKNAME}) || await bot.Contact.find({alias:config.NAME}) // 获取你要发送的联系人
   let one = await superagent.getOne() //获取每日一句
   let weather = await superagent.getWeather() //获取天气信息
   let today = await untils.formatDate(new Date())//获取今天的日期
   let memorialDay = untils.getDay(config.MEMORIAL_DAY)//获取纪念日天数
   let str = today + '<br>' + '今天是我们在一起的第' + memorialDay + '天'
-	  + '<br><br>今日天气早知道<br><br>' + weather.weatherTips +'<br><br>' +weather.todayWeather+ '每日一句:<br><br>'+one+'<br><br>'+'------来自最爱你的我'
-  await contact.say(str)//发送消息
+	  + '<br><br>今日天气早知道<br>' + weather.weatherTips +'<br>' +weather.todayWeather+ '<br>每日一句:<br>'+one+'<br><br>'+'————————来自最爱你的我'
+  try{
+    logMsg = str
+	await contact.say(str) // 发送消息
+  }catch (e) {
+	logMsg = e.message
+  }
+  console.log(logMsg)
 }
 
-const bot = new Wechaty()
+const bot = new Wechaty({name:'WechatEveryDay'})
 
 bot.on('scan',    onScan)
 bot.on('login',   onLogin)
