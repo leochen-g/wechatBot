@@ -55,11 +55,6 @@ async function onMessage (msg) {
 		if(keyRoom){
 		  try{
 			await contact.say(roomCodeLocal||roomCodeUrl)
-			keyRoom.on('join',async (room, inviteeList, inviter)=>{
-			  const nameList = inviteeList.map(c => c.name()).join(',')
-			  console.log(`微信每日说新加成员 ${nameList}, 邀请人： ${inviter}`)
-			  await keyRoom.say(`微信每日说：欢迎新朋友 ${nameList}`)
-			})
 		  }catch (e) {
 			console.error(e)
 		  }
@@ -127,6 +122,17 @@ async function main() {
   }
   console.log(logMsg)
 }
+// 加群提醒
+function roomJoin(room, inviteeList, inviter) {
+  const nameList = inviteeList.map(c => c.name()).join(',')
+  room.topic().then(function (res) {
+	const roomNameReg = eval(config.ROOMNAME)
+	if(roomNameReg.test(res)){
+	  console.log(`群名： ${res} ，加入新成员： ${nameList}, 邀请人： ${inviter}`)
+	  room.say(`${res}：欢迎新朋友 @${nameList}，<br>使用过程中有什么问题都可以在群里提出`)
+	}
+  })
+}
 
 const bot = new Wechaty({name:'WechatEveryDay'})
 
@@ -135,7 +141,7 @@ bot.on('login',   onLogin)
 bot.on('logout',  onLogout)
 bot.on('message', onMessage)
 bot.on('friendship', onFriendShip)
-
+bot.on('room-join',roomJoin)
 
 bot.start()
 	.then(() => console.log('开始登陆微信'))
