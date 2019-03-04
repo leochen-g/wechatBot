@@ -55,7 +55,11 @@ async function onMessage (msg) {
 		if(keyRoom){
 		  try{
 			await contact.say(roomCodeLocal||roomCodeUrl)
-			await keyRoom.say('微信每日说：欢迎新朋友', contact)
+			keyRoom.on('join',async (room, inviteeList, inviter)=>{
+			  const nameList = inviteeList.map(c => c.name()).join(',')
+			  console.log(`微信每日说新加成员 ${nameList}, 邀请人： ${inviter}`)
+			  await keyRoom.say(`微信每日说：欢迎新朋友 ${nameList}`)
+			})
 		  }catch (e) {
 			console.error(e)
 		  }
@@ -131,6 +135,7 @@ bot.on('login',   onLogin)
 bot.on('logout',  onLogout)
 bot.on('message', onMessage)
 bot.on('friendship', onFriendShip)
+
 
 bot.start()
 	.then(() => console.log('开始登陆微信'))
