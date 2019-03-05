@@ -54,14 +54,14 @@ async function onMessage (msg) {
 		let keyRoom = await this.Room.find({topic: roomReg})
 		if(keyRoom){
 		  try{
-			await contact.say(roomCodeLocal||roomCodeUrl)
+			// await contact.say(roomCodeLocal||roomCodeUrl)
 		  }catch (e) {
 			console.error(e)
 		  }
 		}
 	  }else {
-		await contact.say('你好，不要轻易调戏我，我只会发群二维码，不会聊天的！')
-		await contact.say('请回复暗号：加群  获取群二维码图片')
+		await contact.say('你好，由于目前群里人数超过100，群主将会看到消息后，第一时间把你拉入群中！')
+		await contact.say('谢谢理解^_^')
 	  }
 	}
   }
@@ -112,8 +112,8 @@ async function main() {
   let weather = await superagent.getWeather() //获取天气信息
   let today = await untils.formatDate(new Date())//获取今天的日期
   let memorialDay = untils.getDay(config.MEMORIAL_DAY)//获取纪念日天数
-  let str = today + '<br>' + '今天是我们在一起的第' + memorialDay + '天'
-	  + '<br><br>今日天气早知道<br>' + weather.weatherTips +'<br>' +weather.todayWeather+ '<br>每日一句:<br>'+one+'<br><br>'+'————————来自最爱你的我'
+  let str = today + '<br>今天又是元气满满的一天,要开心奥！<br>' +  '与你在一起的第' + memorialDay + '天'
+	  + '<br><br>早上出门要注意天气变化<br>' + weather.weatherTips +'<br>' +weather.todayWeather+ '<br>每日一句:<br>'+one+'<br><br>'+'————————来自最爱你的我'
   try{
     logMsg = str
 	await contact.say(str) // 发送消息

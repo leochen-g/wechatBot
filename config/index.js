@@ -9,7 +9,7 @@ module.exports ={
   MEMORIAL_DAY:'2015/04/18', //你和收信者的纪念日
   NAME:'A兔子',//备注姓名
   NICKNAME:'嗯哼', //昵称
-  SENDDATE:'30 15 8 * * *',//定时发送时间 每天8点15分30秒发送，规则见 /schedule/index.js
+  SENDDATE:'0 0 8 * * *',//定时发送时间 每天8点15分30秒发送，规则见 /schedule/index.js
   ROOMNAME:'/^你的群名/i', //群名(请只修改中文，不要删除符号，这是正则)
   ADDFRIENDWORD:'/你要触发的关键词/i',//自动加好友触发的关键词(请只修改中文，不要删除符号，这是正则)
   ADDROOMWORD:'/加群/',//自动发送群图片触发关键词(请只修改中文，不要删除符号，这是正则)
