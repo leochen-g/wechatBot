@@ -16,19 +16,19 @@ function formatDate(date) {
     var week = tempDate.getDay();
     var str = ''
     if (week === 0) {
-        str = '今天是星期日'
+        str = '星期日'
     } else if (week === 1) {
-        str = "今天是星期一";
+        str = "星期一";
     } else if (week === 2) {
-        str = "今天是星期二";
+        str = "星期二";
     } else if (week === 3) {
-        str = "今天是星期三";
+        str = "星期三";
     } else if (week === 4) {
-        str = "今天是星期四";
+        str = "星期四";
     } else if (week === 5) {
-        str = "今天是星期五";
+        str = "星期五";
     } else if (week === 6) {
-        str = "今天是星期六";
+        str = "星期六";
     }
     if (hour < 10) {
         hour = "0" + hour;
@@ -39,7 +39,7 @@ function formatDate(date) {
     if (second < 10) {
         second = "0" + second;
     }
-    return year + "年" + month + "月" + day + "日 " + hour + ":" + min + ":" + second + ' '+ str;
+    return year + "-" + month + "-" + day + "日 " + hour + ":" + min  + ' '+ str;
 }
 
 module.exports = {
