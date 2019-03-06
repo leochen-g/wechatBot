@@ -298,8 +298,11 @@ github:[https://github.com/gengchen528/wechatBot](https://github.com/gengchen528
 
 ## 更新日志
 
+2019-03-06
+* 添加图灵机器人配置项，需要先去注册图灵机器人，[网址](http://www.tuling123.com)
 2019-03-04
 * 进群后播报欢迎词
+
 2019-03-02：
 * 添加自动加好友，自动拉群可配置项
 * 重启后可维持登录状态

@@ -31,6 +31,17 @@ async function getWeather() { //获取墨迹天气
   }
   return  obj
 }
+
+async function getReply(word) { // 青云api，智能聊天机器人
+  let url = config.AIBOTAPI
+  let res = await superagent.req(url,'GET',{key:config.APIKEY,info:word})
+  let content = JSON.parse(res.text)
+  if(content.code===100000){
+    return content.text
+  }else {
+    return '我好像迷失在无边的网络中了，你能找回我么'
+  }
+}
 module.exports ={
-  getOne,getWeather
+  getOne,getWeather,getReply
 }

@@ -62,8 +62,25 @@ async function onMessage (msg) {
 		  }
 		}
 	  }else {
-		await contact.say('你好，由于目前群里人数超过100，群主将会看到消息后，第一时间把你拉入群中！')
-		await contact.say('谢谢理解^_^')
+		if(config.AUTOREPLY){ // 如果开启自动聊天
+		  let reply = await superagent.getReply(content)
+		  console.log('图灵机器人回复：',reply)
+		  try{
+			await contact.say(reply)
+		  }catch (e) {
+			console.error(e)
+		  }
+		}
+	  }
+	}else {
+	  if(config.AUTOREPLY){ // 如果开启自动聊天
+		let reply = await superagent.getReply(content)
+		console.log('图灵机器人回复：',reply)
+		try{
+		  await contact.say(reply)
+		}catch (e) {
+		  console.error(e)
+		}
 	  }
 	}
   }
