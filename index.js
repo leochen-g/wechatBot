@@ -2,14 +2,14 @@
  * WechatBot
  *  - https://github.com/gengchen528/wechatBot
  */
-const {Wechaty,Friendship} = require('wechaty')
+const {Wechaty, Friendship} = require('wechaty')
 const schedule = require('./schedule/index')
 const config = require('./config/index')
 const untils = require('./untils/index')
 const superagent = require('./superagent/index')
 const {FileBox} = require('file-box') //文件读取模块
 //  二维码生成
-function onScan (qrcode, status) {
+function onScan(qrcode, status) {
   require('qrcode-terminal').generate(qrcode)  // 在console端显示二维码
   const qrcodeImageUrl = [
 	'https://api.qrserver.com/v1/create-qr-code/?data=',
@@ -19,12 +19,12 @@ function onScan (qrcode, status) {
 }
 
 // 登录
-async function onLogin (user) {
+async function onLogin(user) {
   console.log(`贴心小助理${user}登录了`)
   // 登陆后创建定时任务
-  schedule.setSchedule(config.SENDDATE,()=>{
+  schedule.setSchedule(config.SENDDATE, () => {
 	console.log('你的贴心小助理开始工作啦！')
-    main()
+	main()
   })
 }
 
@@ -32,8 +32,9 @@ async function onLogin (user) {
 function onLogout(user) {
   console.log(`${user} 登出`)
 }
+
 // 监听对话 根据关键词自动加群
-async function onMessage (msg) {
+async function onMessage(msg) {
   const contact = msg.from() // 发消息人
   const content = msg.text() //消息内容
   const room = msg.room() //是否是群消息
@@ -42,49 +43,29 @@ async function onMessage (msg) {
   if (msg.self()) {
 	return
   }
-  if(room){ // 如果是群消息
+  if (room) { // 如果是群消息
 	const topic = await room.topic()
-    console.log(`群名: ${topic} 发消息人: ${contact.name()} 内容: ${content}`)
-  }else { // 如果非群消息
+	console.log(`群名: ${topic} 发消息人: ${contact.name()} 内容: ${content}`)
+  } else { // 如果非群消息
 	console.log(`发消息人: ${contact.name()} 消息内容: ${content}`)
-	if(config.AUTOADDROOM){ //判断是否开启自动加群功能
-	  let addRoomReg = eval(config.ADDROOMWORD)
-	  let roomReg = eval(config.ROOMNAME)
-	  if(addRoomReg.test(content)&&!room){
-		let keyRoom = await this.Room.find({topic: roomReg})
-		if(keyRoom){
-		  try{
-              await contact.say('你好，由于目前群里人数超过100，群主将会看到消息后，第一时间把你拉入群中！')
-              await contact.say('谢谢理解^_^')
-			// await contact.say(roomCodeLocal||roomCodeUrl)
-		  }catch (e) {
-			console.error(e)
-		  }
-		}
-	  }else {
-		if(config.AUTOREPLY){ // 如果开启自动聊天
-		  let reply = await superagent.getReply(content)
-		  console.log('图灵机器人回复：',reply)
-		  try{
-			await contact.say(reply)
-		  }catch (e) {
-			console.error(e)
-		  }
-		}
+	let keywordArray = content.split(" ")
+	console.log("分词后效果",keywordArray)
+	if (keywordArray[0] === "提醒") {
+	  let scheduleObj = {}
+	  if (keywordArray[1] === "我") {
+		scheduleObj.nickName = contact.name()
+		scheduleObj.content = "亲爱的"+scheduleObj.nickName + "您好：是时候" + keywordArray[4] + "了"
+	  } else {
+		scheduleObj.nickName = keywordArray[1]
+		scheduleObj.content = "亲爱的"+scheduleObj.nickName + "您好，"+contact.name()+"委托我提醒你，" + keywordArray[4]
 	  }
-	}else {
-	  if(config.AUTOREPLY){ // 如果开启自动聊天
-		let reply = await superagent.getReply(content)
-		console.log('图灵机器人回复：',reply)
-		try{
-		  await contact.say(reply)
-		}catch (e) {
-		  console.error(e)
-		}
-	  }
+	  scheduleObj.time = "0 " + keywordArray[3] + " " + keywordArray[2] + " * * *"
+	  addSchedule(scheduleObj)
+	  contact.say('小助手已经把你的提醒牢记在心上了')
 	}
   }
 }
+
 // 自动加好友功能
 async function onFriendShip(friendship) {
   let logMsg
@@ -101,8 +82,8 @@ async function onFriendShip(friendship) {
 		 * and accept this request by `request.accept()`
 		 */
 	  case Friendship.Type.Receive:
-	    let addFriendReg = eval(config.ADDFRIENDWORD)
-		if (addFriendReg.test(friendship.hello())&&config.AUTOADDFRIEND) { //判断是否开启自动加好友功能
+		let addFriendReg = eval(config.ADDFRIENDWORD)
+		if (addFriendReg.test(friendship.hello()) && config.AUTOADDFRIEND) { //判断是否开启自动加好友功能
 		  logMsg = '自动添加好友，因为验证信息中带关键字‘每日说’'
 		  await friendship.accept()
 		} else {
@@ -123,44 +104,57 @@ async function onFriendShip(friendship) {
   }
   console.log(logMsg)
 }
+
+async function addSchedule(obj) { // 添加定时提醒
+  let nickName = obj.nickName
+  let time = obj.time
+  let content = obj.content
+  let contact = await bot.Contact.find({name: nickName})
+  let j =  schedule.setSchedule(time, async () => {
+	console.log('你的专属提醒开启啦！')
+	await contact.say(content)
+  })
+}
+
 // 自动发消息功能
 async function main() {
   let logMsg
-  let  contact = await bot.Contact.find({name:config.NICKNAME}) || await bot.Contact.find({alias:config.NAME}) // 获取你要发送的联系人
+  let contact = await bot.Contact.find({name: config.NICKNAME}) || await bot.Contact.find({alias: config.NAME}) // 获取你要发送的联系人
   let one = await superagent.getOne() //获取每日一句
   let weather = await superagent.getWeather() //获取天气信息
   let today = await untils.formatDate(new Date())//获取今天的日期
   let memorialDay = untils.getDay(config.MEMORIAL_DAY)//获取纪念日天数
-  let str = today +  '<br>我们在一起的第' + memorialDay + '天<br>'+ '<br>元气满满的一天开始啦,要开心噢^_^<br>'
-    + '<br>今日天气<br>' + weather.weatherTips +'<br>' +weather.todayWeather+ '<br>每日一句:<br>'+one+'<br><br>'+'————————最爱你的我'
-  try{
-    logMsg = str
+  let str = today + '<br>我们在一起的第' + memorialDay + '天<br>' + '<br>元气满满的一天开始啦,要开心噢^_^<br>'
+	  + '<br>今日天气<br>' + weather.weatherTips + '<br>' + weather.todayWeather + '<br>每日一句:<br>' + one + '<br><br>' + '————————最爱你的我'
+  try {
+	logMsg = str
 	await contact.say(str) // 发送消息
-  }catch (e) {
+  } catch (e) {
 	logMsg = e.message
   }
   console.log(logMsg)
 }
+
 // 加群提醒
 function roomJoin(room, inviteeList, inviter) {
   const nameList = inviteeList.map(c => c.name()).join(',')
   room.topic().then(function (res) {
 	const roomNameReg = eval(config.ROOMNAME)
-	if(roomNameReg.test(res)){
+	if (roomNameReg.test(res)) {
 	  console.log(`群名： ${res} ，加入新成员： ${nameList}, 邀请人： ${inviter}`)
 	  room.say(`${res}：欢迎新朋友 @${nameList}，<br>使用过程中有什么问题都可以在群里提出`)
 	}
   })
 }
 
-const bot = new Wechaty({name:'WechatEveryDay'})
+const bot = new Wechaty({name: 'WechatEveryDay'})
 
-bot.on('scan',    onScan)
-bot.on('login',   onLogin)
-bot.on('logout',  onLogout)
+bot.on('scan', onScan)
+bot.on('login', onLogin)
+bot.on('logout', onLogout)
 bot.on('message', onMessage)
 bot.on('friendship', onFriendShip)
-bot.on('room-join',roomJoin)
+bot.on('room-join', roomJoin)
 
 bot.start()
 	.then(() => console.log('开始登陆微信'))
