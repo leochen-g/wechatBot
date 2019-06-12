@@ -17,7 +17,7 @@ module.exports ={
   AUTOREPLY:false,//自动聊天功能 默认关闭
   AIBOTAPI:'http://www.tuling123.com/openapi/api',//图灵机器人API 注册地址http://www.turingapi.com/
   APIKEY:'你的图灵机器人apikey',//图灵机器人apikey
-  ROOMNAME:'/^你的群名/i', //群名(请只修改中文，不要删除符号，这是正则)
+  ROOMNAME:/^你的群名/i, //群名(请只修改中文，不要删除符号，这是正则)
   ADDFRIENDWORD:'/你要触发的关键词/i',//自动加好友触发的关键词(请只修改中文，不要删除符号，这是正则)
   ADDROOMWORD:'/加群/',//自动发送群图片触发关键词(请只修改中文，不要删除符号，这是正则)
   ROOMCODEURL:'http://image.bloggeng.com/qun.png',//群二维码url链接(与本地群二维码路径选填一个)
