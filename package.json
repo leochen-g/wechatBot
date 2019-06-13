@@ -6,6 +6,12 @@
     "scripts": {
         "start": "node index.js"
     },
+    "keywords": [
+        "微信每日说",
+        "wechaty",
+        "微信机器人",
+        "微信助手"
+    ],
     "author": "",
     "license": "ISC",
     "devDependencies": {
