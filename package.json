@@ -1,19 +1,19 @@
 {
-  "name": "wechatbot",
-  "version": "1.0.0",
-  "description": "",
-  "superagent": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "cheerio": "^1.0.0-rc.2",
-    "file-box": "^0.8.27",
-    "node-schedule": "^1.3.2",
-    "qrcode-terminal": "^0.12.0",
-    "superagent": "^4.1.0",
-    "wechaty": "^0.22.6"
-  }
+    "name": "wechatbot",
+    "version": "1.0.0",
+    "description": "",
+    "superagent": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "cheerio": "^1.0.0-rc.2",
+        "file-box": "^0.8.27",
+        "node-schedule": "^1.3.2",
+        "qrcode-terminal": "^0.12.0",
+        "superagent": "^4.1.0",
+        "wechaty": "^0.27.16"
+    }
 }
