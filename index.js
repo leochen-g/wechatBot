@@ -8,7 +8,10 @@ const config = require('./config/index')
 const untils = require('./untils/index')
 const superagent = require('./superagent/index')
 const { FileBox } = require('file-box') //文件读取模块
-    //  二维码生成
+
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+//  二维码生成
 function onScan(qrcode, status) {
     require('qrcode-terminal').generate(qrcode) // 在console端显示二维码
     const qrcodeImageUrl = [
@@ -53,6 +56,7 @@ async function onMessage(msg) {
                 let keyRoom = await this.Room.find({ topic: roomReg })
                 if (keyRoom) {
                     try {
+                        await delay(2000)
                         await keyRoom.add(contact) // web版最近已支持直接邀请好友进群
                     } catch (e) {
                         console.error(e)
@@ -63,6 +67,7 @@ async function onMessage(msg) {
                     let reply = await superagent.getReply(content)
                     console.log('图灵机器人回复：', reply)
                     try {
+                        await delay(2000)
                         await contact.say(reply)
                     } catch (e) {
                         console.error(e)
@@ -72,8 +77,9 @@ async function onMessage(msg) {
         } else {
             if (config.AUTOREPLY) { // 如果开启自动聊天
                 let reply = await superagent.getReply(content)
-                console.log('图灵机器人回复：', reply)
+                console.log('天行机器人回复：', reply)
                 try {
+                    await delay(2000)
                     await contact.say(reply)
                 } catch (e) {
                     console.error(e)
@@ -101,6 +107,7 @@ async function onFriendShip(friendship) {
                 let addFriendReg = eval(config.ADDFRIENDWORD)
                 if (addFriendReg.test(friendship.hello()) && config.AUTOADDFRIEND) { //判断是否开启自动加好友功能
                     logMsg = '自动添加好友，因为验证信息中带关键字‘每日说’'
+                    await delay(60000)
                     await friendship.accept()
                 } else {
                     logMsg = '没有通过验证 ' + friendship.hello()
@@ -132,6 +139,7 @@ async function main() {
         '<br>今日天气<br>' + weather.weatherTips + '<br>' + weather.todayWeather + '<br>每日一句:<br>' + one + '<br><br>' + '————————最爱你的我'
     try {
         logMsg = str
+        await delay(2000)
         await contact.say(str) // 发送消息
     } catch (e) {
         logMsg = e.message
