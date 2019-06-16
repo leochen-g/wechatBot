@@ -49,6 +49,8 @@ npm
     
 ### 下载代码
 
+![](https://user-gold-cdn.xitu.io/2019/6/16/16b5fcb3ea7ee507?w=1917&h=937&f=png&s=180655)
+
     git clone git@github.com:gengchen528/wechatBot.git（如果没有安装git，也可直接下载项目zip包）
     cd wechatBot
     npm install
