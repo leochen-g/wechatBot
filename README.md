@@ -1,74 +1,98 @@
 ## 微信每日说
 
-### 详细介绍 
-参见[微信每日说，每日自动发暖心话给男（女）朋友](detail.md)
+[![node version](https://img.shields.io/badge/node-%3E%3D10-blue.svg)](http://nodejs.cn/download/)
+[![node version](https://img.shields.io/badge/wechaty-%3E%3D0.27-blue.svg)](https://github.com/Chatie/wechaty)
+![](https://img.shields.io/badge/Window-green.svg)
+![](https://img.shields.io/badge/Mac-yellow.svg)
+![](https://img.shields.io/badge/Centos-blue.svg)
+
+wechatBot是基于node与[wechaty](https://github.com/Chatie/wechaty)的微信小情话工具。最初功能只有每日发送天气和一句情话，后来添加了智能机器人聊天功能，自动加群，自动加好友，定时助手功能等。但由于本项目面向小白用户与刚接触node开发的用户，故拆分了两个项目，一个是功能专一面向小白的[《微信每日说》](https://github.com/gengchen528/wechatBot)（也就是本项目），另一个也在我的仓库下[《微信个人秘书》](https://github.com/gengchen528/wechat-assistant)面向有较多编程经验的用户。下面主要介绍微信每日说的使用
 
 ### 主要功能
 
-* 定时给朋友发送每日天气提醒以及每日一句
-* 根据关键词自动加好友
-* 根据关键词自动拉群功能(需要群二维码图片，群人数超过100人，只能手动邀请)
-* 图灵机器人自动聊天（需要自己申请图灵api）
-* 还在不断增加中..
+* 定时给女朋友发送每日天气提醒，以及每日一句
+* 天行机器人自动陪女朋友聊天（需要自己申请[天行机器人](https://www.tianapi.com/signup.html?source=474284281)api，不过目前开源的机器人api都不要抱太大希望，因为很傻的，如果你有发现好的机器人可以来推荐）
+* 最近看到python版支持多女朋友配置，我思考了一下，还是不要加了比较好，我们要做一个专一的人，哈哈
+* 想要更多功能，请移步[《微信个人秘书》](https://github.com/gengchen528/wechat-assistant)
 
 ## 环境
 
-* node.js (version >= 10  作者使用node 10.15.1)
+* node.js (version >= 10  建议10.16.0版本)
 * Mac/Linux/Windows
 
 ## 安装配置
 
-### 配置源
+视频教程：录制中...(稍后发布)
 
-npm或yarn配置淘宝源（重要，因为需要安装chromium，不配置的话下载会失败或者速度很慢，因为这个玩意140M左右）
+### 下载安装node
+
+访问node官网：[http://nodejs.cn/download/](http://nodejs.cn/download/)，下载系统对应版本的node安装包，并执行安装。
+
+> 1、windows下安装node步骤详细参考 [https://www.cnblogs.com/liuqiyun/p/8133904.html](https://www.cnblogs.com/liuqiyun/p/8133904.html)
+
+> 2、Mac下安装node详细步骤参考 [https://blog.csdn.net/qq_32407233/article/details/83758899](https://blog.csdn.net/qq_32407233/article/details/83758899)
+
+
+> 3、Linux下安装node详细步骤参考 [https://www.cnblogs.com/liuqi/p/6483317.html](https://www.cnblogs.com/liuqi/p/6483317.html)
+
+
+### 配置npm源
+
+配置npm源为淘宝源（重要，因为需要安装chromium，不配置的话下载会失败或者速度很慢，因为这个玩意140M左右）
 
 npm
 
     npm config set registry https://registry.npm.taobao.org
     npm config set disturl https://npm.taobao.org/dist
     npm config set puppeteer_download_host https://npm.taobao.org/mirrors
-yarn
 
-    yarn config set registry https://registry.npm.taobao.org
-    yarn config set disturl https://npm.taobao.org/dist
-    yarn config set puppeteer_download_host https://npm.taobao.org/mirrors
     
-### 安装
-    git clone git@github.com:gengchen528/wechatBot.git
+### 下载代码
+
+    git clone git@github.com:gengchen528/wechatBot.git（如果没有安装git，也可直接下载项目zip包）
     cd wechatBot
     npm install
-    npm run start
-    
-## 项目相关配置
-    config/index.js
-    
-    // 配置文件
-    module.exports ={
-      // 基础定时发送功能配置项（必填项）
-      NAME:'A兔子',//备注姓名
-      NICKNAME:'嗯哼', //昵称
-      MEMORIAL_DAY:'2015/04/18', //你和收信者的纪念日
-      CITY:'shanghai',//收信者所在城市
-      LOCATION:'pudong-new-district',//收信者所在区 （可以访问墨迹天气网站后，查询区的英文拼写）
-      SENDDATE:'0 0 8 * * *',//定时发送时间 每天8点0分0秒发送，规则见 /schedule/index.js
-      ONE:'http://wufazhuce.com/',////ONE的web版网站
-      MOJI_HOST:'https://tianqi.moji.com/weather/china/', //中国墨迹天气url
-    
-    
-      //高级功能配置项（非必填项）
-      AUTOADDFRIEND:false,//自动加好友功能  默认关闭
-      AUTOADDROOM:false,//自动拉群功能 默认关闭
-      AUTOREPLY:false,//自动聊天功能 默认关闭
-      AIBOTAPI:'http://www.tuling123.com/openapi/api',//图灵机器人API 注册地址http://www.turingapi.com/
-      APIKEY:'你的图灵机器人apikey',//图灵机器人apikey
-      ROOMNAME:'/^你的群名/i', //群名(请只修改中文，不要删除符号，这是正则)
-      ADDFRIENDWORD:'/你要触发的关键词/i',//自动加好友触发的关键词(请只修改中文，不要删除符号，这是正则)
-      ADDROOMWORD:'/加群/',//自动发送群图片触发关键词(请只修改中文，不要删除符号，这是正则)
-      ROOMCODEURL:'http://image.bloggeng.com/qun.png',//群二维码url链接(与本地群二维码路径选填一个)
-      ROOMLOCALPATH:'./static/qun.png',//本地群二维码图片路径（与群url选填一个）
-    }
-
    
+### 项目配置
+
+所有配置项均在 config/index.js文件中
+
+  ```  
+    // 配置文件
+    module.exports = {
+        // 基础定时发送功能配置项（必填项）
+        NAME: 'A兔子', //女朋友备注姓名
+        NICKNAME: '嗯哼', //女朋友昵称
+        MEMORIAL_DAY: '2015/04/18', //你和女朋友的纪念日
+        CITY: 'shanghai', //女朋友所在城市
+        LOCATION: 'pudong-new-district', //女朋友所在区（可以访问墨迹天气网站后，查询区的英文拼写）
+        SENDDATE: '0 0 8 * * *', //定时发送时间 每天8点0分0秒发送，规则见 /schedule/index.js
+        ONE: 'http://wufazhuce.com/', ////ONE的web版网站
+        MOJI_HOST: 'https://tianqi.moji.com/weather/china/', //中国墨迹天气url
+
+        //高级功能配置项（非必填项）
+        AUTOREPLY: false, //自动聊天功能 默认关闭
+        AIBOTAPI: 'http://api.tianapi.com/txapi/robot/', //天行机器人API 注册地址https://www.tianapi.com/signup.html?source=474284281
+        APIKEY: '天行机器人apikey', //天行机器人apikey
+    }
+```
+### 执行
+
+当以上步骤都完成后，在命令行界面输入 `node index.js`，第一次执行会下载puppeteer，所以会比较慢，稍等一下，出现二维码后即可拿出微信扫描
+
+![](https://user-gold-cdn.xitu.io/2019/6/16/16b5fa4678361c14?w=969&h=724&f=png&s=51158)
+
+执行成功后可看到
+
+![](https://user-gold-cdn.xitu.io/2019/6/16/16b5fa9bc1f5c76e?w=977&h=322&f=png&s=25797)
+
+## 效果展示
+![](https://user-gold-cdn.xitu.io/2019/6/16/16b5fbf97805f02e?w=959&h=779&f=png&s=73686)
+
+![](https://user-gold-cdn.xitu.io/2019/6/16/16b5fbdd0d8cf81f?w=401&h=592&f=png&s=55280)
+
+![](https://user-gold-cdn.xitu.io/2019/6/16/16b5fc09ba9648f6?w=396&h=897&f=png&s=72212)
+
 ## 常见问题处理
 
 1. 我的微信号无法登陆
@@ -116,6 +140,7 @@ yarn
     * 确认npm或yarn已经配置好淘宝源  
     * 存在package-lock.json文件先删除
     * 删除`node_modules`后重新执行`npm install` 或`cnpm install`
+    * 也可添加小助手微信后，发送`'加群'`进入微信每日说技术交流群
 
 ## 注意
 
@@ -124,9 +149,7 @@ yarn
 
 ## 最后
 
-因为给这个微信加了自动加好友和拉群功能，所以有兴趣的小伙伴可以加我的微信进行测试，记得在加好友的时候带上暗号：`微信每日说`，加好友后发送`加群`，会自动发送群的二维码；
-
-**注意** 加好友请在验证中填写 `微信每日说`  才可以自动加好友
+因为给这个微信加了自动加好友和拉群功能，所以有兴趣的小伙伴可以加我的微信小号，加好友后发送`加群`，会自动发送群的二维码，同时此小号有更多高级功能等待你的发现。
 
 ![](https://user-gold-cdn.xitu.io/2019/2/28/1693401c6c3e6b02?w=430&h=430&f=png&s=53609)
 
@@ -139,6 +162,8 @@ github:[https://github.com/gengchen528/wechatBot](https://github.com/gengchen528
 ![](https://user-gold-cdn.xitu.io/2019/3/1/169381d277ba6401?w=258&h=258&f=png&s=42373)
 
 ## 更新日志
+2019-06-16
+* 更新wechaty版本，更改图灵机器人为天行机器人，简化操作配置，修改说明文档，更适合小白用户
 
 2019-03-06
 * 添加图灵机器人配置项，需要先去注册图灵机器人，[网址](http://www.tuling123.com)
