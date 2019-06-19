@@ -22,7 +22,9 @@ wechatBot是基于node与[wechaty](https://github.com/Chatie/wechaty)的微信�
 
 ## 安装配置
 
-视频教程：录制中...(稍后发布)
+视频教程： [《三步教你用Node做一个微信哄女友神器》](https://www.bilibili.com/video/av56077628?pop_share=1)
+
+<iframe src="//player.bilibili.com/player.html?aid=56077628&cid=98021463&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 ### 下载安装node
 
