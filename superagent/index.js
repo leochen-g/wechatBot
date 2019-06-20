@@ -3,11 +3,17 @@ const config = require('../config/index')
 const cheerio = require('cheerio')
 
 async function getOne() { // 获取每日一句
-    let res = await superagent.req(config.ONE, 'GET')
-    let $ = cheerio.load(res.text)
-    let todayOneList = $('#carousel-one .carousel-inner .item')
-    let todayOne = $(todayOneList[0]).find('.fp-one-cita').text().replace(/(^\s*)|(\s*$)/g, "")
-    return todayOne;
+    try {
+        let res = await superagent.req(config.ONE, 'GET')
+        let $ = cheerio.load(res.text)
+        let todayOneList = $('#carousel-one .carousel-inner .item')
+        let todayOne = $(todayOneList[0]).find('.fp-one-cita').text().replace(/(^\s*)|(\s*$)/g, "")
+        return todayOne;
+    }catch(err){
+        console.log('错误',err)
+        return err
+    }
+    
 }
 
 async function getWeather() { //获取墨迹天气
