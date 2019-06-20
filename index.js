@@ -24,7 +24,7 @@ function onScan(qrcode, status) {
 // 登录
 async function onLogin(user) {
     console.log(`贴心小助理${user}登录了`)
-    if(config.AUTOREPLY){
+    if (config.AUTOREPLY) {
         console.log(`已开启机器人自动聊天模式`)
     }
     // 登陆后创建定时任务
@@ -41,6 +41,7 @@ async function onMessage(msg) {
     const contact = msg.from() // 发消息人
     const content = msg.text() //消息内容
     const room = msg.room() //是否是群消息
+
     if (msg.self()) {
         return
     }
@@ -49,18 +50,18 @@ async function onMessage(msg) {
         console.log(`群名: ${topic} 发消息人: ${contact.name()} 内容: ${content}`)
     } else { // 如果非群消息
         console.log(`发消息人: ${contact.name()} 消息内容: ${content}`)
-            if (config.AUTOREPLY) { // 如果开启自动聊天
-                let reply = await superagent.getReply(content)
-                console.log('天行机器人回复：', reply)
-                try {
-                    await delay(2000)
-                    await contact.say(reply)
-                } catch (e) {
-                    console.error(e)
-                }
+        if (config.AUTOREPLY && contact.name() == config.AUTOREPLYPERSON) { // 如果开启自动聊天且已经指定了智能聊天的对象才开启机器人聊天
+            let reply = await superagent.getReply(content)
+            console.log('天行机器人回复：', reply)
+            try {
+                await delay(2000)
+                await contact.say(reply)
+            } catch (e) {
+                console.error(e)
             }
         }
-    
+    }
+
 }
 
 // 创建微信每日说定时任务
@@ -84,7 +85,7 @@ async function initDay() {
             logMsg = e.message
         }
         console.log(logMsg)
-    })  
+    })
 }
 
 
