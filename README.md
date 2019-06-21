@@ -74,6 +74,7 @@ npm
 
         //高级功能配置项（非必填项）
         AUTOREPLY: false, //自动聊天功能 默认关闭
+        AUTOREPLYPERSON: '指定好友昵称', //指定好友开启机器人聊天功能   指定好友的昵称
         AIBOTAPI: 'http://api.tianapi.com/txapi/robot/', //天行机器人API 注册地址https://www.tianapi.com/signup.html?source=474284281
         APIKEY: '天行机器人apikey', //天行机器人apikey
     }
