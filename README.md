@@ -98,6 +98,13 @@ npm
 
 ## 常见问题处理
 
+问题解决基本方案
+
+    * 先检查node版本是否大于10
+    * 确认npm或yarn已经配置好淘宝源  
+    * 存在package-lock.json文件先删除
+    * 删除`node_modules`后重新执行`npm install` 或`cnpm install`
+
 1. 我的微信号无法登陆
 
     从2017年6月下旬开始，使用基于web版微信接入方案存在大概率的被限制登陆的可能性。 主要表现为：无法登陆Web 微信，但不影响手机等其他平台。 验证是否被限制登陆： https://wx.qq.com 上扫码查看是否能登陆。 更多内容详见：
@@ -107,8 +114,16 @@ npm
     [[谣言] 微信将会关闭网页版本](https://github.com/Chatie/wechaty/issues/990)
 
     [新注册的微信号无法登陆](https://github.com/Chatie/wechaty/issues/872)
+2. 类似Failed to download Chromium rxxx的问题
+   ` ERROR: Failed to download Chromium r515411! Set "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD" env variable to skip download.{ Error: read ETIMEDOUT at _errnoException (util.js:1041:11) at TLSWrap.onread (net.js:606:25) code: 'ETIMEDOUT', errno: 'ETIMEDOUT', syscall: 'read' } ` 
 
-2. 执行npm run start时无法安装puppet-puppeteer&&Chromium
+   解决方案：[https://github.com/GoogleChrome/puppeteer/issues/1597](https://github.com/GoogleChrome/puppeteer/issues/1597)
+
+    `npm config set puppeteer_download_host=https://npm.taobao.org/mirrors`
+
+    `sudo npm install puppeteer --unsafe-perm=true --allow-root`
+
+3. 执行npm run start时无法安装puppet-puppeteer&&Chromium
 
     * Centos7下部署出现以下问题
         ![](http://image.bloggeng.com/14481551970095_.pic_hd.jpg)
@@ -122,6 +137,12 @@ npm
         
             #字体
             yum install ipa-gothic-fonts xorg-x11-fonts-100dpi xorg-x11-fonts-75dpi xorg-x11-utils xorg-x11-fonts-cyrillic xorg-x11-fonts-Type1 xorg-x11-fonts-misc -y
+    *  ubuntu下，下载puppeteer失败  
+        问题原因：[https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#chrome-headless-doesnt-launch-on-unix](https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#chrome-headless-doesnt-launch-on-unix)
+        解决方案：
+
+            sudo apt-get  gconf-service libasound2 libatk1.0-0 libatk-bridge2.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
+
     *  windows下，下载puppeteer失败
     
        链接：https://pan.baidu.com/s/1YF09nELpO-4KZh3D2nAOhA 
@@ -129,21 +150,16 @@ npm
        
        把下载的文件放到如下图路径，并解压到当前文件夹中即可
        ![](http://image.bloggeng.com/14241551970542_.pic_hd.jpg)
-3. 支持 红包、转账、朋友圈… 吗
+
+4. 支持 红包、转账、朋友圈… 吗
 
    支付相关 - 红包、转账、收款 等都不支持
 
-4. 更多关于wechaty功能相关接口
+5. 更多关于wechaty功能相关接口
 
      [参考wechaty官网文档](https://docs.chatie.io/v/zh/)
 
-5. 其他问题解决方案
-
-    * 先检查node版本是否大于10
-    * 确认npm或yarn已经配置好淘宝源  
-    * 存在package-lock.json文件先删除
-    * 删除`node_modules`后重新执行`npm install` 或`cnpm install`
-    * 也可添加小助手微信后，发送`'加群'`进入微信每日说技术交流群
+6.  也可添加小助手微信后，发送`'加群'`进入微信每日说技术交流群
 
 ## 注意
 
