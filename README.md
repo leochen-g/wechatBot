@@ -124,6 +124,7 @@ npm
     `sudo npm install puppeteer --unsafe-perm=true --allow-root`
 
 3. 执行npm run start时无法安装puppet-puppeteer&&Chromium
+    
 
     * Centos7下部署出现以下问题
         ![](http://image.bloggeng.com/14481551970095_.pic_hd.jpg)
@@ -150,6 +151,13 @@ npm
        
        把下载的文件放到如下图路径，并解压到当前文件夹中即可
        ![](http://image.bloggeng.com/14241551970542_.pic_hd.jpg)
+
+    *  下载puppeteer失败,Linux和Mac执行以下命令
+       `PUPPETEER_DOWNLOAD_HOST = https://npm.taobao.org/mirrors npm install wechaty-puppet-puppeteer`
+
+    *  下载puppeteer失败,Windows执行以下命令
+
+       `SET PUPPETEER_DOWNLOAD_HOST = https://npm.taobao.org/mirrors npm install wechaty-puppet-puppeteer`
 
 4. 支持 红包、转账、朋友圈… 吗
 
@@ -180,12 +188,26 @@ github:[https://github.com/gengchen528/wechatBot](https://github.com/gengchen528
 
 ![](https://user-gold-cdn.xitu.io/2019/3/1/169381d277ba6401?w=258&h=258&f=png&s=42373)
 
+## 鸣谢
+
+感谢[天行数据](https://www.tianapi.com/)提供，天气，土味情话，智能机器人api等接口
+
+
 ## 更新日志
+
+2019-06-27
+* 更新天气接口使用天行api
+* 每日说添加每日情话
+* 依赖中直接加入`wechaty-puppet-puppeteer`安装
+* `.npmrc`中设置项目npm源为淘宝源
+* 添加错误解决方案
+
 2019-06-16
 * 更新wechaty版本，更改图灵机器人为天行机器人，简化操作配置，修改说明文档，更适合小白用户
 
 2019-03-06
 * 添加图灵机器人配置项，需要先去注册图灵机器人，[网址](http://www.tuling123.com)
+
 2019-03-04
 * 进群后播报欢迎词
 

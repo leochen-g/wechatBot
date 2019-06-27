@@ -4,12 +4,11 @@ module.exports = {
     NAME: 'Leo_chen', //女朋友备注姓名
     NICKNAME: 'Leo_chen', //女朋友昵称
     MEMORIAL_DAY: '2015/04/18', //你和女朋友的纪念日
-    CITY: 'shanghai', //女朋友所在城市
-    LOCATION: "pudong-new-district", //女朋友所在区（可以访问墨迹天气网站后，查询区的英文拼写）
+    CITY: '上海', //女朋友所在城市（城市名称，不要带“市”）
     SENDDATE: '0 06 8 * * *', //定时发送时间 每天8点06分0秒发送，规则见 /schedule/index.js
-    ONE: 'http://wufazhuce.com/', ////ONE的web版网站
-    MOJI_HOST: 'https://tianqi.moji.com/weather/china/', //中国墨迹天气url
-
+    ONE: 'http://wufazhuce.com/', // ONE的web版网站
+    SWEETWORD: 'http://api.tianapi.com/txapi/saylove/', // 天行土味情话api接口
+    TIANXINGWEATHER: 'http://api.tianapi.com/txapi/tianqi/', // 天行天气api接口
     //高级功能配置项（非必填项）
     AUTOREPLY: false, //自动聊天功能 默认关闭
     AUTOREPLYPERSON: '指定好友昵称', //指定好友开启机器人聊天功能   指定好友的昵称

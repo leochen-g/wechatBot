@@ -72,11 +72,12 @@ async function initDay() {
         let logMsg
         let contact = await bot.Contact.find({ name: config.NICKNAME }) || await bot.Contact.find({ alias: config.NAME }) // 获取你要发送的联系人
         let one = await superagent.getOne() //获取每日一句
-        let weather = await superagent.getWeather() //获取天气信息
+        let weather = await superagent.getTXweather() //获取天气信息
         let today = await untils.formatDate(new Date()) //获取今天的日期
         let memorialDay = untils.getDay(config.MEMORIAL_DAY) //获取纪念日天数
+        let sweetWord = await superagent.getSweetWord()
         let str = today + '<br>我们在一起的第' + memorialDay + '天<br>' + '<br>元气满满的一天开始啦,要开心噢^_^<br>' +
-            '<br>今日天气<br>' + weather.weatherTips + '<br>' + weather.todayWeather + '<br>每日一句:<br>' + one + '<br><br>' + '————————最爱你的我'
+            '<br>今日天气<br>' + weather.weatherTips + '<br>' + weather.todayWeather + '<br>每日一句:<br>' + one + '<br>' + '<br>每日土味情话：<br>' + sweetWord + '<br><br>' + '————————最爱你的我'
         try {
             logMsg = str
             await delay(2000)
