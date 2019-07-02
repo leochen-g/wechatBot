@@ -57,7 +57,7 @@ async function onMessage(msg) {
                 reply = await superagent.getReply(content)
                 console.log('天行机器人回复：', reply)
             }else if(config.DEFAULTBOT=='1'){ // 图灵聊天机器人
-                reply = await superagent.getTuLingReply(conent)
+                reply = await superagent.getTuLingReply(content)
                 console.log('图灵机器人回复：', reply)
             }
            
