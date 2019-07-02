@@ -65,6 +65,18 @@ async function getTXweather() { // 获取天行天气
     }
 }
 
+
+async function getTuLingReply(word) { // 图灵智能聊天机器人
+    let url = config.TULINGAPI
+    let res = await superagent.req(url,'GET',{key:config.TULINGKEY,info:word})
+    let content = JSON.parse(res.text)
+    if(content.code===100000){
+      return content.text
+    }else {
+      return '出错了：'+ content.text
+    }
+  }
+
 async function getReply(word) { // 天行聊天机器人
     let url = config.AIBOTAPI
     let res = await superagent.req(url, 'GET', { key: config.APIKEY, question: word, mode: 1, datatype: 0 })
@@ -106,5 +118,6 @@ module.exports = {
     getWeather,
     getTXweather,
     getReply,
-    getSweetWord
+		getSweetWord,
+		getTuLingReply
 }
