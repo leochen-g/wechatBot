@@ -15,6 +15,14 @@ wechatBot是基于node与[wechaty](https://github.com/Chatie/wechaty)的微信�
 * 最近看到python版支持多女朋友配置，我思考了一下，还是不要加了比较好，我们要做一个专一的人，哈哈
 * 想要更多功能，请移步[《微信个人秘书》](https://github.com/gengchen528/wechat-assistant)
 
+### 可选聊天机器人
+
+
+* 天行机器人: 默认设置为天行机器人(智能化程度一般)，目前提供我个人的key免费给大家使用，不过还是建议大家自行注册自己账号 [天行数据官网](https://www.tianapi.com/signup.html?source=474284281)
+* 图灵机器人: 目前比较智能的机器人，但是需要注册后进行身份认证，才可调用，且每天只可免费调用100次（收费标准99元/月，每天1000次）
+* 天行对接的图灵机器人: 与图灵机器人智能程度相同，通过天行数据平台调用[详情介绍](https://www.tianapi.com/apiview/98)（收费标准50元/年，每天免费调用500次，[其他收费标准](https://www.tianapi.com/vip.html)）
+
+
 ## 环境
 
 * node.js (version >= 10  建议10.16.0版本)
@@ -61,7 +69,6 @@ npm
 
   ```  
     // 配置文件
-    // 配置文件
     module.exports = {
         // 基础定时发送功能配置项（必填项）
         NAME: 'Leo_chen', //女朋友备注姓名
@@ -74,12 +81,14 @@ npm
         TIANXINGWEATHER: 'http://api.tianapi.com/txapi/tianqi/', // 天行天气api接口
         AIBOTAPI: 'http://api.tianapi.com/txapi/robot/', //天行机器人API 注册地址https://www.tianapi.com/signup.html?source=474284281
         TULINGAPI: 'http://www.tuling123.com/openapi/api', // 图灵1.0接口api
+        TXTULINGAPI: 'http://api.tianapi.com/txapi/tuling/', // 天行对接的图灵机器人接口   https://www.tianapi.com/apiview/98图灵机器人介绍
+
         //高级功能配置项（非必填项）
-        AUTOREPLY: false, //自动聊天功能 默认关闭 开启设置为: true
-        DEFAULTBOT: '0', //设置默认聊天机器人 0 天行机器人 1 图灵机器人
-        AUTOREPLYPERSON: ['指定好友昵称1','指定好友昵称2'], //指定多个好友开启机器人聊天功能   指定好友的昵称
+        AUTOREPLY: true, //自动聊天功能 默认关闭 开启设置为: true
+        DEFAULTBOT: '0', //设置默认聊天机器人 0 天行机器人 1 图灵机器人 2 天行对接的图灵机器人，需要到天行机器人官网充值（50元/年，每天500次）
+        AUTOREPLYPERSON: ['Leo_chen','指定好友昵称2'], //指定多个好友开启机器人聊天功能   指定好友的昵称
         TULINGKEY: '图灵机器人key',//图灵机器人key,需要自己到图灵机器人官网申请，并且需要认证
-        APIKEY: '762be789103e1ae7b65573f8d4fc0df6', //天行机器人apikey，这里奉献上我自己的key，还是建议大家自己申请一下
+        APIKEY: '762be789103e1ae7b65573f8d4fc0df6', //天行机器人apikey，这里奉献上我自己的key，还是建议大家自己申请一下（如需使用天行对接的图灵机器人，请申请自己的账号并充值，免费提供的key无图灵机器人功能）
     }
 ```
 ### 执行
@@ -197,6 +206,9 @@ github:[https://github.com/gengchen528/wechatBot](https://github.com/gengchen528
 
 
 ## 更新日志
+2019-07-04
+* 添加天行数据的图灵机器人接口支持（）
+
 2019-07-02
 * 添加机器人多人回复配置项
 * 添加图灵机器人与天行机器人可选配置项

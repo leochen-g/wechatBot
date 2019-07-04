@@ -59,8 +59,10 @@ async function onMessage(msg) {
             }else if(config.DEFAULTBOT=='1'){ // 图灵聊天机器人
                 reply = await superagent.getTuLingReply(content)
                 console.log('图灵机器人回复：', reply)
+            }else if(config.DEFAULTBOT=='2'){ // 天行对接的图灵聊
+              reply = await superagent.getTXTLReply(content)
+              console.log('天行对接的图灵机器人回复：', reply)
             }
-           
             try {
                 await delay(2000)
                 await contact.say(reply)

@@ -1,6 +1,10 @@
 const superagent = require('../config/superagent')
 const config = require('../config/index')
 const cheerio = require('cheerio')
+const {machineIdSync} = require('node-machine-id')
+const crypto = require('crypto')
+let md5 = crypto.createHash('md5');
+let uniqueId =md5.update(machineIdSync()).digest('hex') // 获取机器唯一识别码并MD5，方便机器人上下文关联
 
 async function getOne() { // 获取每日一句
     try {
@@ -13,7 +17,6 @@ async function getOne() { // 获取每日一句
         console.log('错误', err)
         return err
     }
-
 }
 
 async function getWeather() { //获取墨迹天气（暂时废除）
@@ -65,6 +68,18 @@ async function getTXweather() { // 获取天行天气
     }
 }
 
+async function getTXTLReply(word){ // 天行对接的图灵机器人
+  let url = config.TXTULINGAPI
+  let res = await superagent.req(url, 'GET', {key: config.APIKEY,question: word, userid: uniqueId})
+  let content = JSON.parse(res.text)
+  if (content.code === 200) {
+    console.log('天行对接的图灵机器人:',content)
+    let response = content.newslist[0].reply
+    return response
+  } else {
+    return '我好像迷失在无边的网络中了，接口调用错误：'+ content.msg
+  }
+}
 
 async function getTuLingReply(word) { // 图灵智能聊天机器人
     let url = config.TULINGAPI
@@ -79,7 +94,7 @@ async function getTuLingReply(word) { // 图灵智能聊天机器人
 
 async function getReply(word) { // 天行聊天机器人
     let url = config.AIBOTAPI
-    let res = await superagent.req(url, 'GET', { key: config.APIKEY, question: word, mode: 1, datatype: 0 })
+    let res = await superagent.req(url, 'GET', { key: config.APIKEY, question: word, mode: 1, datatype: 0, userid: uniqueId})
     let content = JSON.parse(res.text)
     if (content.code === 200) {
         console.log(content)
@@ -113,11 +128,13 @@ async function getSweetWord() { // 获取土味情话
         console.log('获取接口失败', err)
     }
 }
+
 module.exports = {
     getOne,
     getWeather,
     getTXweather,
     getReply,
 		getSweetWord,
-		getTuLingReply
+    getTuLingReply,
+    getTXTLReply
 }
