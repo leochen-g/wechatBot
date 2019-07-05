@@ -5,7 +5,7 @@
 const { Wechaty, Friendship } = require('wechaty')
 const schedule = require('./schedule/index')
 const config = require('./config/index')
-const untils = require('./untils/index')
+const untils = require('./utils/index')
 const superagent = require('./superagent/index')
 
 // 延时函数，防止检测出类似机器人行为操作
