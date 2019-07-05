@@ -12,6 +12,7 @@ wechatBot是基于node与[wechaty](https://github.com/Chatie/wechaty)的微信�
 
 * 定时给女朋友发送每日天气提醒，以及每日一句
 * 天行机器人自动陪女朋友聊天（需要自己申请[天行机器人](https://www.tianapi.com/signup.html?source=474284281)api，不过目前开源的机器人api都不要抱太大希望，因为很傻的，如果你有发现好的机器人可以来推荐）
+* 垃圾分类功能，使用方法：？垃圾名称
 * 最近看到python版支持多女朋友配置，我思考了一下，还是不要加了比较好，我们要做一个专一的人，哈哈
 * 想要更多功能，请移步[《微信个人秘书》](https://github.com/gengchen528/wechat-assistant)
 
@@ -206,6 +207,9 @@ github:[https://github.com/gengchen528/wechatBot](https://github.com/gengchen528
 
 
 ## 更新日志
+2019-07-05
+* 添加垃圾分类功能，默认开启，使用方法： ？垃圾名称
+
 2019-07-04
 * 添加天行数据的图灵机器人接口支持（）
 

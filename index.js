@@ -50,8 +50,12 @@ async function onMessage(msg) {
         console.log(`群名: ${topic} 发消息人: ${contact.name()} 内容: ${content}`)
     } else { // 如果非群消息
         console.log(`发消息人: ${contact.name()} 消息内容: ${content}`)
-      
-        if (config.AUTOREPLY && config.AUTOREPLYPERSON.indexOf(contact.name())>-1) { // 如果开启自动聊天且已经指定了智能聊天的对象才开启机器人聊天
+        if(content.substr(0,1)=='?'||content.substr(0,1)=='？'){
+          let contactContent = content.replace('?','').replace('？','')
+          let res = await superagent.getRubbishType(contactContent)
+          await delay(2000)
+          await contact.say(res)
+        }else if (config.AUTOREPLY && config.AUTOREPLYPERSON.indexOf(contact.name())>-1) { // 如果开启自动聊天且已经指定了智能聊天的对象才开启机器人聊天
             let reply
             if(config.DEFAULTBOT=='0'){ // 天行聊天机器人逻辑
                 reply = await superagent.getReply(content)

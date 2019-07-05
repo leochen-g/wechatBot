@@ -12,7 +12,7 @@ module.exports = {
     AIBOTAPI: 'http://api.tianapi.com/txapi/robot/', //天行机器人API 注册地址https://www.tianapi.com/signup.html?source=474284281
     TULINGAPI: 'http://www.tuling123.com/openapi/api', // 图灵1.0接口api
     TXTULINGAPI: 'http://api.tianapi.com/txapi/tuling/', // 天行对接的图灵机器人接口   https://www.tianapi.com/apiview/98图灵机器人介绍
-
+    TXRUBBISHAPI: 'http://api.tianapi.com/txapi/lajifenlei/',// 天行垃圾分类接口
     //高级功能配置项（非必填项）
     AUTOREPLY: true, //自动聊天功能 默认关闭 开启设置为: true
     DEFAULTBOT: '0', //设置默认聊天机器人 0 天行机器人 1 图灵机器人 2 天行对接的图灵机器人，需要到天行机器人官网充值（50元/年，每天500次）
