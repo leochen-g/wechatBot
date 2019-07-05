@@ -105,14 +105,13 @@ npm
 ## 效果展示
 ![](https://user-gold-cdn.xitu.io/2019/6/16/16b5fbf97805f02e?w=959&h=779&f=png&s=73686)
 <div>
-<img style="width:43%;display:inline-block;margin-right:10%" src="http://image.bloggeng.com/WechatIMG62069.jpeg" >
-<img style="width:43%;display:inline-block" src="http://image.bloggeng.com/WechatIMG62085.jpeg"alt="">
+    <img style="width:43%;display:inline-block;" src="http://image.bloggeng.com/WechatIMG62069.jpeg">
+    <img style="width:43%;display:inline-block" src="http://image.bloggeng.com/WechatIMG62085.jpeg">
 </div>
 
 <div>
 <img style="width:43%;display:inline-block;margin-right:10%" src="https://user-gold-cdn.xitu.io/2019/6/16/16b5fc09ba9648f6?w=396&h=897&f=png&s=72212"alt="">
 <img style="width:43%;display:inline-block;" src="https://user-gold-cdn.xitu.io/2019/6/16/16b5fbdd0d8cf81f?w=401&h=592&f=png&s=55280" >
-
 </div>
 
 
