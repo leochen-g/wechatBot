@@ -39,23 +39,27 @@ function onLogout(user) {
 // 监听对话
 async function onMessage(msg) {
     const contact = msg.from() // 发消息人
-    const content = msg.text() //消息内容
-    const room = msg.room() //是否是群消息
-
+    const content = msg.text().trim() // 消息内容
+    const room = msg.room() // 是否是群消息
+    const alias = await contact.alias() // 发消息人备注
+    const isText = msg.type() === bot.Message.Type.Text
     if (msg.self()) {
         return
     }
-    if (room) { // 如果是群消息
+    if (room&&isText) { // 如果是群消息 目前只处理文字消息
         const topic = await room.topic()
         console.log(`群名: ${topic} 发消息人: ${contact.name()} 内容: ${content}`)
-    } else { // 如果非群消息
-        console.log(`发消息人: ${contact.name()} 消息内容: ${content}`)
+    } else if(isText) { // 如果非群消息 目前只处理文字消息
+        console.log(`发消息人: ${alias} 消息内容: ${content}`)
         if(content.substr(0,1)=='?'||content.substr(0,1)=='？'){
           let contactContent = content.replace('?','').replace('？','')
-          let res = await superagent.getRubbishType(contactContent)
-          await delay(2000)
-          await contact.say(res)
-        }else if (config.AUTOREPLY && config.AUTOREPLYPERSON.indexOf(contact.name())>-1) { // 如果开启自动聊天且已经指定了智能聊天的对象才开启机器人聊天
+          if(contactContent){
+            let res = await superagent.getRubbishType(contactContent)
+            await delay(2000)
+            await contact.say(res)
+          }
+        }else if (config.AUTOREPLY && config.AUTOREPLYPERSON.indexOf(alias)>-1) { // 如果开启自动聊天且已经指定了智能聊天的对象才开启机器人聊天\
+          if(content){
             let reply
             if(config.DEFAULTBOT=='0'){ // 天行聊天机器人逻辑
                 reply = await superagent.getReply(content)
@@ -73,6 +77,7 @@ async function onMessage(msg) {
             } catch (e) {
                 console.error(e)
             }
+          } 
         }
     }
 
@@ -90,8 +95,7 @@ async function initDay() {
         let today = await untils.formatDate(new Date()) //获取今天的日期
         let memorialDay = untils.getDay(config.MEMORIAL_DAY) //获取纪念日天数
         let sweetWord = await superagent.getSweetWord()
-        let str = today + '<br>我们在一起的第' + memorialDay + '天<br>' + '<br>元气满满的一天开始啦,要开心噢^_^<br>' +
-            '<br>今日天气<br>' + weather.weatherTips + '<br>' + weather.todayWeather + '<br>每日一句:<br>' + one + '<br>' + '<br>每日土味情话：<br>' + sweetWord + '<br><br>' + '————————最爱你的我'
+        let str = `${today}<br>我们在一起的第${memorialDay}天<br><br>元气满满的一天开始啦,要开心噢^_^<br><br>今日天气<br>${weather.weatherTips}<br>${weather.todayWeather}<br>每日一句:<br>${one}<br><br>每日土味情话：<br>${sweetWord}<br><br>————————最爱你的我`
         try {
             logMsg = str
             await delay(2000)

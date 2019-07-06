@@ -6,6 +6,7 @@
 *.project
 *.classpath
 *.idea
+*.vscode
 *.iml
 *.DS_Store
 /build/
