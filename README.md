@@ -177,16 +177,17 @@ npm
     *  下载puppeteer失败,Windows执行以下命令
 
        `SET PUPPETEER_DOWNLOAD_HOST = https://npm.taobao.org/mirrors npm install wechaty-puppet-puppeteer`
-
-4. 支持 红包、转账、朋友圈… 吗
+4. 如图所示问题解决办法，关闭win/mac防火墙；如果公司网络有限制的话也可能引起无法启动问题
+    ![](http://image.bloggeng.com/WechatIMG7619.png)
+5. 支持 红包、转账、朋友圈… 吗
 
    支付相关 - 红包、转账、收款 等都不支持
 
-5. 更多关于wechaty功能相关接口
+6. 更多关于wechaty功能相关接口
 
      [参考wechaty官网文档](https://docs.chatie.io/v/zh/)
 
-6.  也可添加小助手微信后，发送`'加群'`进入微信每日说技术交流群
+7.  也可添加小助手微信后，发送`'加群'`进入微信每日说技术交流群
 
 ## 注意
 
