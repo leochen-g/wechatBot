@@ -7,7 +7,6 @@ let md5 = crypto.createHash('md5');
 let uniqueId = md5.update(machineIdSync()).digest('hex'); // 获取机器唯一识别码并MD5，方便机器人上下文关联
 const ONE = 'http://wufazhuce.com/'; // ONE的web版网站
 const TXHOST = 'http://api.tianapi.com/txapi/'; // 天行host
-const APIKEY = '762be789103e1ae7b65573f8d4fc0df6'; // 天行key
 const TULINGAPI = 'http://www.tuling123.com/openapi/api'; // 图灵1.0接口api
 
 async function getOne() {
@@ -32,7 +31,7 @@ async function getTXweather() {
   let url = TXHOST + 'tianqi/';
   try {
     let res = await superagent.req(url, 'GET', {
-      key: APIKEY,
+      key: config.TXAPIKEY,
       city: config.CITY
     });
     let content = JSON.parse(res.text);
@@ -89,7 +88,7 @@ async function getTuLingReply(word) {
 async function getReply(word) {
   let url = TXHOST + 'robot/';
   let res = await superagent.req(url, 'GET', {
-    key: APIKEY,
+    key: config.TXAPIKEY,
     question: word,
     mode: 1,
     datatype: 0,
@@ -115,7 +114,7 @@ async function getSweetWord() {
   // 获取土味情话
   let url = TXHOST + 'saylove/';
   try {
-    let res = await superagent.req(url, 'GET', { key: APIKEY });
+    let res = await superagent.req(url, 'GET', { key: config.TXAPIKEY });
     let content = JSON.parse(res.text);
     if (content.code === 200) {
       let sweet = content.newslist[0].content;
@@ -136,7 +135,7 @@ async function getSweetWord() {
 
 async function getRubbishType(word) {
   let url = TXHOST + 'lajifenlei/';
-  let res = await superagent.req(url, 'GET', { key: APIKEY, word: word });
+  let res = await superagent.req(url, 'GET', { key: config.TXAPIKEY, word: word });
   let content = JSON.parse(res.text);
   if (content.code === 200) {
     let type;
