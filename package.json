@@ -23,9 +23,6 @@
         "node-schedule": "^1.3.2",
         "qrcode-terminal": "^0.12.0",
         "superagent": "^4.1.0",
-        "wechaty": "^0.26.1"
-    },
-    "dependencies": {
-        "wechaty-puppet-puppeteer": "^0.16.1"
+        "wechaty": "^0.28.3"
     }
 }
