@@ -22,7 +22,9 @@
         "node-machine-id": "^1.1.12",
         "node-schedule": "^1.3.2",
         "qrcode-terminal": "^0.12.0",
-        "superagent": "^4.1.0",
-        "wechaty": "^0.28.3"
+        "superagent": "^4.1.0"
+    },
+    "dependencies": {
+        "wechaty": "^0.32.5"
     }
 }
