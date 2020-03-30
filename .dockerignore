@@ -1,3 +1,9 @@
+*node_modules
+npm-debug.log
+.git
+README.md
+.idea
+*.memory-card.json
 */.settings
 */target
 *target
@@ -9,10 +15,3 @@
 *.vscode
 *.iml
 *.DS_Store
-/build/
-/bin/
-*node_modules
-*/log
-.env
-*.memory-card.json
-package-lock.json

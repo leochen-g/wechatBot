@@ -44,7 +44,6 @@ wechatBot是基于node与[wechaty](https://github.com/Chatie/wechaty)的微信�
 
 > 3、Linux下安装node详细步骤参考 [https://www.cnblogs.com/liuqi/p/6483317.html](https://www.cnblogs.com/liuqi/p/6483317.html)
 
-
 ### 配置npm源
 
 配置npm源为淘宝源（重要，因为需要安装chromium，不配置的话下载会失败或者速度很慢，因为这个玩意140M左右）
@@ -92,6 +91,16 @@ npm
         APIKEY: '762be789103e1ae7b65573f8d4fc0df6', //天行机器人apikey，这里奉献上我自己的key，还是建议大家自己申请一下（如需使用天行对接的图灵机器人，请申请自己的账号并充值，免费提供的key无图灵机器人功能）
     }
 ```
+
+
+### docker部署（新增）
+需要提前安装docker环境，并且配置好config中内容
+```shell script
+docker build -t leochen/wechat-bot .
+docker run leochen/wechat-bot
+```
+
+
 ### 执行
 
 当以上步骤都完成后，在命令行界面输入 `node index.js`，第一次执行会下载puppeteer，所以会比较慢，稍等一下，出现二维码后即可拿出微信扫描
