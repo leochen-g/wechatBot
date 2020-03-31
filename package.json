@@ -4,7 +4,8 @@
     "description": "",
     "superagent": "index.js",
     "scripts": {
-        "start": "node index.js"
+        "start": "node index.js",
+        "puppet-install": "node node_modules/.bin/wechaty-puppet-install"
     },
     "keywords": [
         "微信每日说",
