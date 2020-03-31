@@ -18,10 +18,9 @@ wechatBot是基于node与[wechaty](https://github.com/Chatie/wechaty)的微信�
 
 ### 可选聊天机器人
 
-
 * 天行机器人: 默认设置为天行机器人(智能化程度一般)，目前提供我个人的key免费给大家使用，不过还是建议大家自行注册自己账号 [天行数据官网](https://www.tianapi.com/signup.html?source=474284281)
 * 图灵机器人: 目前比较智能的机器人，但是需要注册后进行身份认证，才可调用，且每天只可免费调用100次（收费标准99元/月，每天1000次）[图灵官网](http://www.tuling123.com)
-* 天行对接的图灵机器人: 与图灵机器人智能程度相同，通过天行数据平台调用[详情介绍](https://www.tianapi.com/apiview/98)（收费标准50元/年，每天免费调用500次，[其他收费标准](https://www.tianapi.com/vip.html)）
+* 天行对接的图灵机器人: 与图灵机器人智能程度相同，通过天行数据平台调用[详情介绍](https://www.tianapi.com/apiview/98)
 
 
 ## 环境
@@ -32,6 +31,23 @@ wechatBot是基于node与[wechaty](https://github.com/Chatie/wechaty)的微信�
 ## 安装配置
 
 视频教程： <a href="https://www.bilibili.com/video/av56077628?pop_share=1" target="_blank">《三步教你用Node做一个微信哄女友神器》</a>
+
+### docker部署（新增）
+
+#### 自行构建镜像
+需要提前安装docker环境，并且配置好`config/index.js`中内容
+```shell script
+docker build -t leochen/wechat-bot .
+docker run leochen/wechat-bot
+```
+
+#### 拉取已build镜像（推荐）
+
+首先创建一个`config`目录,里面创建`index.js`文件后，把项目配置内容拷贝到`index.js`文件中，修改对应参数
+```shell script
+docker push aibotk/wechat-bot
+docker run -v config目录的绝对路径:/home/app/config leochen/wechat-bot
+```
 
 ### 下载安装node
 
@@ -70,37 +86,22 @@ npm
   ```  
     // 配置文件
     module.exports = {
-        // 基础定时发送功能配置项（必填项）
-        NAME: 'Leo_chen', //女朋友备注姓名
-        NICKNAME: 'Leo_chen', //女朋友昵称
+        // 每日说配置项（必填项）
+        NAME: 'leo助手', //女朋友备注姓名
+        NICKNAME: 'leo助手', //女朋友昵称
         MEMORIAL_DAY: '2015/04/18', //你和女朋友的纪念日
         CITY: '上海', //女朋友所在城市（城市名称，不要带“市”）
-        SENDDATE: '0 06 8 * * *', //定时发送时间 每天8点06分0秒发送，规则见 /schedule/index.js
-        ONE: 'http://wufazhuce.com/', // ONE的web版网站
-        SWEETWORD: 'http://api.tianapi.com/txapi/saylove/', // 天行土味情话api接口
-        TIANXINGWEATHER: 'http://api.tianapi.com/txapi/tianqi/', // 天行天气api接口
-        AIBOTAPI: 'http://api.tianapi.com/txapi/robot/', //天行机器人API 注册地址https://www.tianapi.com/signup.html?source=474284281
-        TULINGAPI: 'http://www.tuling123.com/openapi/api', // 图灵1.0接口api
-        TXTULINGAPI: 'http://api.tianapi.com/txapi/tuling/', // 天行对接的图灵机器人接口   https://www.tianapi.com/apiview/98图灵机器人介绍
-
+        SENDDATE: '0 09 14 * * *', //定时发送时间 每天8点06分0秒发送，规则见 /schedule/index.js
+        TXAPIKEY: '762be789103e1ae7b65573f8d4fc0df6', //此处须填写个人申请的天行apikey,请替换成自己的 申请地址https://www.tianapi.com/signup.html?source=474284281
+    
         //高级功能配置项（非必填项）
-        AUTOREPLY: true, //自动聊天功能 默认关闭 开启设置为: true
-        DEFAULTBOT: '0', //设置默认聊天机器人 0 天行机器人 1 图灵机器人 2 天行对接的图灵机器人，需要到天行机器人官网充值（50元/年，每天500次）
-        AUTOREPLYPERSON: ['Leo_chen','指定好友昵称2'], //指定多个好友开启机器人聊天功能   指定好友的昵称
-        TULINGKEY: '图灵机器人key',//图灵机器人key,需要自己到图灵机器人官网申请，并且需要认证
-        APIKEY: '762be789103e1ae7b65573f8d4fc0df6', //天行机器人apikey，这里奉献上我自己的key，还是建议大家自己申请一下（如需使用天行对接的图灵机器人，请申请自己的账号并充值，免费提供的key无图灵机器人功能）
+        AUTOREPLY: false, //自动聊天功能 默认关闭 开启设置为: true
+        DEFAULTBOT: '0', //设置默认聊天机器人 0 天行机器人 1 图灵机器人 2 天行对接的图灵机器人，需要到天行机器人官网充值（50元/年，每天1000次）
+        AUTOREPLYPERSON: ['好友1备注','好友2备注'], //指定多个好友开启机器人聊天功能   指定好友的备注，最好不要带有特殊字符
+        TULINGKEY: '图灵机器人apikey',//图灵机器人apikey,需要自己到图灵机器人官网申请，并且需要认证
+    
     }
 ```
-
-
-### docker部署（新增）
-需要提前安装docker环境，并且配置好config中内容
-```shell script
-docker build -t leochen/wechat-bot .
-docker run leochen/wechat-bot
-```
-
-
 ### 执行
 
 当以上步骤都完成后，在命令行界面输入 `node index.js`，第一次执行会下载puppeteer，所以会比较慢，稍等一下，出现二维码后即可拿出微信扫描

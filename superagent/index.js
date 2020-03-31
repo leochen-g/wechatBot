@@ -1,4 +1,4 @@
-const superagent = require('../config/superagent');
+const superagent = require('./superagent');
 const config = require('../config/index');
 const cheerio = require('cheerio');
 const { machineIdSync } = require('node-machine-id');
