@@ -231,8 +231,11 @@ github:[https://github.com/gengchen528/wechatBot](https://github.com/gengchen528
 
 捐助方法如下：
 
+
+<div style="display: flex;justify-content: flex-start">
 <img width="300" height="350" src="http://image.xkboke.com/web-inn/aibotk-weixin.png" />
 <img width="300" height="350" src="http://image.xkboke.com/web-inn/aibotk-alipay.png" />
+</div>
 
 
 ## 更新日志
