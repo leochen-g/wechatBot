@@ -222,8 +222,24 @@ github:[https://github.com/gengchen528/wechatBot](https://github.com/gengchen528
 
 感谢[天行数据](https://www.tianapi.com/)提供，天气，土味情话，智能机器人api等接口
 
+## 捐助
+如果您认为这个项目对你有所帮助，是否可以为它捐助一点资金呢？
+
+不管钱多钱少，您的捐助将会激励我持续开发新的功能！🎉
+
+感谢您的支持！
+
+捐助方法如下：
+
+<img width="300" height="350" src="http://image.xkboke.com/web-inn/aibotk-weixin.png" />
+<img width="300" height="350" src="http://image.xkboke.com/web-inn/aibotk-alipay.png" />
+
 
 ## 更新日志
+2020-04-02
+* 添加docker部署支持
+* 更新wechaty版本
+
 2019-07-05
 * 添加垃圾分类功能，默认开启，使用方法： ？垃圾名称
 

@@ -9,7 +9,6 @@ RUN  npm install \
      && npm run puppet-install
 
 FROM node:10
-MAINTAINER leo
 ENV APT_SOURCE_HOST="mirrors.aliyun.com"
 ## 清华镜像源（备选）
 # ENV APT_SOURCE_HOST=mirrors.tuna.tsinghua.edu.cn
