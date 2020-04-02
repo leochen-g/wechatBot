@@ -1,7 +1,7 @@
 ## 微信每日说
 
 [![node version](https://img.shields.io/badge/node-%3E%3D10-blue.svg)](http://nodejs.cn/download/)
-[![node version](https://img.shields.io/badge/wechaty-%3E%3D0.27-blue.svg)](https://github.com/Chatie/wechaty)
+[![node version](https://img.shields.io/badge/wechaty-%3E%3D0.32.5-blue.svg)](https://github.com/Chatie/wechaty)
 ![](https://img.shields.io/badge/Window-green.svg)
 ![](https://img.shields.io/badge/Mac-yellow.svg)
 ![](https://img.shields.io/badge/Centos-blue.svg)
@@ -28,26 +28,26 @@ wechatBot是基于node与[wechaty](https://github.com/Chatie/wechaty)的微信�
 * node.js (version >= 10  建议10.16.0版本)
 * Mac/Linux/Windows
 
-## 安装配置
+## docker部署（新增）
 
-视频教程： <a href="https://www.bilibili.com/video/av56077628?pop_share=1" target="_blank">《三步教你用Node做一个微信哄女友神器》</a>
-
-### docker部署（新增）
-
-#### 自行构建镜像
+### 自行构建镜像
 需要提前安装docker环境，并且配置好`config/index.js`中内容
 ```shell script
 docker build -t leochen/wechat-bot .
 docker run leochen/wechat-bot
 ```
 
-#### 拉取已build镜像（推荐）
+### 拉取已build镜像（推荐）
 
 首先创建一个`config`目录,里面创建`index.js`文件后，把项目配置内容拷贝到`index.js`文件中，修改对应参数
 ```shell script
 docker push aibotk/wechat-bot
 docker run -v config目录的绝对路径:/home/app/config leochen/wechat-bot
 ```
+
+## 安装配置
+
+视频教程： <a href="https://www.bilibili.com/video/av56077628?pop_share=1" target="_blank">《三步教你用Node做一个微信哄女友神器》</a>
 
 ### 下载安装node
 
@@ -92,7 +92,7 @@ npm
         MEMORIAL_DAY: '2015/04/18', //你和女朋友的纪念日
         CITY: '上海', //女朋友所在城市（城市名称，不要带“市”）
         SENDDATE: '0 09 14 * * *', //定时发送时间 每天8点06分0秒发送，规则见 /schedule/index.js
-        TXAPIKEY: '762be789103e1ae7b65573f8d4fc0df6', //此处须填写个人申请的天行apikey,请替换成自己的 申请地址https://www.tianapi.com/signup.html?source=474284281
+        TXAPIKEY: '', //此处须填写个人申请的天行apikey,请替换成自己的（自行申请天行天气和土味情话的接口） 申请地址https://www.tianapi.com/signup.html?source=474284281
     
         //高级功能配置项（非必填项）
         AUTOREPLY: false, //自动聊天功能 默认关闭 开启设置为: true
