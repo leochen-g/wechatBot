@@ -6,7 +6,7 @@
 ![](https://img.shields.io/badge/Mac-yellow.svg)
 ![](https://img.shields.io/badge/Centos-blue.svg)
 
-wechatBot是基于node与[wechaty](https://github.com/Chatie/wechaty)的微信小情话工具。最初功能只有每日发送天气和一句情话，后来添加了智能机器人聊天功能，自动加群，自动加好友，定时助手功能等。但由于本项目面向小白用户与刚接触node开发的用户，故拆分了两个项目，一个是功能专一面向小白的[《微信每日说》](https://github.com/gengchen528/wechatBot)（也就是本项目），另一个也在我的仓库下[《微信个人秘书》](https://github.com/gengchen528/wechat-assistant)面向有较多编程经验的用户。下面主要介绍微信每日说的使用
+wechatBot是基于node与[wechaty](https://github.com/Chatie/wechaty)的微信小情话工具。最初功能只有每日发送天气和一句情话，后来添加了智能机器人聊天功能，自动加群，自动加好友，定时助手功能等。但由于本项目面向小白用户与刚接触node开发的用户，故拆分了两个项目，一个是功能专一面向小白的[《微信每日说》](https://github.com/gengchen528/wechatBot)（也就是本项目），另一个也在我的仓库下[《智能微秘书》](https://github.com/gengchen528/wechat-assistant-pro)面向有较多编程经验的用户。下面主要介绍微信每日说的使用
 
 ### 主要功能
 
@@ -14,7 +14,7 @@ wechatBot是基于node与[wechaty](https://github.com/Chatie/wechaty)的微信�
 * 天行机器人自动陪女朋友聊天（需要自己申请[天行机器人](https://www.tianapi.com/signup.html?source=474284281)api，不过目前开源的机器人api都不要抱太大希望，因为很傻的，如果你有发现好的机器人可以来推荐）
 * 垃圾分类功能，使用方法：？垃圾名称
 * 最近看到python版支持多女朋友配置，我思考了一下，还是不要加了比较好，我们要做一个专一的人，哈哈
-* 想要更多功能，请移步[《微信个人秘书》](https://github.com/gengchen528/wechat-assistant)
+* 想要更多群管理，自动加好友功能，并体验在线配置服务，请移步[《智能微秘书》](https://github.com/gengchen528/wechat-assistant-pro)
 
 ### 可选聊天机器人
 
@@ -129,10 +129,11 @@ npm
 
 问题解决基本方案
 
-    * 先检查node版本是否大于10
-    * 确认npm或yarn已经配置好淘宝源  
-    * 存在package-lock.json文件先删除
-    * 删除`node_modules`后重新执行`npm install` 或`cnpm install`
+* 先检查node版本是否大于10
+* 确认npm或yarn已经配置好淘宝源  
+* 存在package-lock.json文件先删除
+* 删除`node_modules`后重新执行`npm install` 或`cnpm install`
+* 使用最新版[《智能微秘书》](https://github.com/gengchen528/wechat-assistant-pro)，摆脱环境问题
 
 1. 我的微信号无法登陆
 
