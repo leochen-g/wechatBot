@@ -1,7 +1,7 @@
 ## 微信每日说
 
-[![node version](https://img.shields.io/badge/node-%3E%3D10-blue.svg)](http://nodejs.cn/download/)
-[![node version](https://img.shields.io/badge/wechaty-%3E%3D0.32.5-blue.svg)](https://github.com/Chatie/wechaty)
+[![node version](https://img.shields.io/badge/node-%3E%3D12-blue.svg)](http://nodejs.cn/download/)
+[![node version](https://img.shields.io/badge/wechaty-%3E%3D0.51.8-blue.svg)](https://github.com/Chatie/wechaty)
 ![](https://img.shields.io/badge/Window-green.svg)
 ![](https://img.shields.io/badge/Mac-yellow.svg)
 ![](https://img.shields.io/badge/Centos-blue.svg)
@@ -25,7 +25,7 @@ wechatBot是基于node与[wechaty](https://github.com/Chatie/wechaty)的微信�
 
 ## 环境
 
-* node.js (version >= 10  建议10.16.0版本)
+* node.js (version >= 12)
 * Mac/Linux/Windows
 
 ## docker部署（新增）
@@ -240,6 +240,9 @@ github:[https://github.com/gengchen528/wechatBot](https://github.com/gengchen528
 
 
 ## 更新日志
+2020-12-07
+* 更新wechaty版本
+
 2020-04-02
 * 添加docker部署支持
 * 更新wechaty版本
