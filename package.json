@@ -1,6 +1,6 @@
 {
     "name": "wechatbot",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "",
     "superagent": "index.js",
     "scripts": {
@@ -22,6 +22,6 @@
         "node-schedule": "^1.3.2",
         "qrcode-terminal": "^0.12.0",
         "superagent": "^4.1.0",
-        "wechaty": "^0.51.8"
+        "wechaty": "^0.56.6"
     }
 }

@@ -9,14 +9,14 @@ const untils = require('./utils/index');
 const superagent = require('./superagent/index');
 
 // 延时函数，防止检测出类似机器人行为操作
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 //  二维码生成
 function onScan(qrcode, status) {
   require('qrcode-terminal').generate(qrcode); // 在console端显示二维码
   const qrcodeImageUrl = [
     'https://api.qrserver.com/v1/create-qr-code/?data=',
-    encodeURIComponent(qrcode)
+    encodeURIComponent(qrcode),
   ].join('');
   console.log(qrcodeImageUrl);
 }
@@ -102,11 +102,7 @@ async function initDay() {
     let today = await untils.formatDate(new Date()); //获取今天的日期
     let memorialDay = untils.getDay(config.MEMORIAL_DAY); //获取纪念日天数
     let sweetWord = await superagent.getSweetWord();
-    let str = `${today}<br>我们在一起的第${memorialDay}天<br><br>元气满满的一天开始啦,要开心噢^_^<br><br>今日天气<br>${
-      weather.weatherTips
-    }<br>${
-      weather.todayWeather
-    }<br>每日一句:<br>${one}<br><br>每日土味情话：<br>${sweetWord}<br><br>————————最爱你的我`;
+    let str = `${today}<br>我们在一起的第${memorialDay}天<br><br>元气满满的一天开始啦,要开心噢^_^<br><br>今日天气<br>${weather.weatherTips}<br>${weather.todayWeather}<br>每日一句:<br>${one}<br><br>每日土味情话：<br>${sweetWord}<br><br>————————最爱你的我`;
     try {
       logMsg = str;
       await delay(2000);
@@ -118,7 +114,10 @@ async function initDay() {
   });
 }
 
-const bot = new Wechaty({ name: 'WechatEveryDay' });
+const bot = new Wechaty({
+  name: 'WechatEveryDay',
+  puppet: 'wechaty-puppet-puppeteer',
+});
 
 bot.on('scan', onScan);
 bot.on('login', onLogin);
@@ -128,4 +127,4 @@ bot.on('message', onMessage);
 bot
   .start()
   .then(() => console.log('开始登陆微信'))
-  .catch(e => console.error(e));
+  .catch((e) => console.error(e));
