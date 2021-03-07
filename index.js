@@ -38,7 +38,7 @@ function onLogout(user) {
 
 // 监听对话
 async function onMessage(msg) {
-  const contact = msg.from(); // 发消息人
+  const contact = msg.talker(); // 发消息人
   const content = msg.text().trim(); // 消息内容
   const room = msg.room(); // 是否是群消息
   const alias = await contact.alias(); // 发消息人备注
@@ -116,7 +116,10 @@ async function initDay() {
 
 const bot = new Wechaty({
   name: 'WechatEveryDay',
-  puppet: 'wechaty-puppet-puppeteer',
+  puppet: 'wechaty-puppet-puppeteer', // 如果有token，记得更换对应的puppet
+  // puppetOptions: {
+  //   token: '如果有token，填入wechaty获取的token，并把注释放开'
+  // }
 });
 
 bot.on('scan', onScan);
