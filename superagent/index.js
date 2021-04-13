@@ -96,10 +96,11 @@ async function getReply(word) {
   });
   let content = JSON.parse(res.text);
   if (content.code === 200) {
+    let res = content.newslist[0]
     let response = '';
-    if (content.datatype === 'text') {
-      response = content.newslist[0].reply
-    } else if (content.datatype === 'view') {
+    if (res.datatype === 'text') {
+      response = res.reply
+    } else if (res.datatype === 'view') {
       response =`虽然我不太懂你说的是什么，但是感觉很高级的样子，因此我也查找了类似的文章去学习，你觉得有用吗<br>《${content.newslist[0].title}》${content.newslist[0].url}`
     } else {
       response = '你太厉害了，说的话把我难倒了，我要去学习了，不然没法回答你的问题';
