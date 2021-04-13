@@ -1,7 +1,7 @@
 ## 微信每日说
 
 [![node version](https://img.shields.io/badge/node-%3E%3D12-blue.svg)](http://nodejs.cn/download/)
-[![node version](https://img.shields.io/badge/wechaty-%3E%3D0.51.8-blue.svg)](https://github.com/Chatie/wechaty)
+[![node version](https://img.shields.io/badge/wechaty-%3E%3D0.57.19-blue.svg)](https://github.com/Chatie/wechaty)
 ![](https://img.shields.io/badge/Window-green.svg)
 ![](https://img.shields.io/badge/Mac-yellow.svg)
 ![](https://img.shields.io/badge/Centos-blue.svg)
@@ -239,6 +239,10 @@ github:[https://github.com/gengchen528/wechatBot](https://github.com/gengchen528
 </div>
 
 ## 更新日志
+
+2021-04-13
+
+- 重大更新，被限制web登录的微信也可以使用了
 
 2021-02-08
 

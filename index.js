@@ -41,7 +41,7 @@ async function onMessage(msg) {
   const contact = msg.talker(); // 发消息人
   const content = msg.text().trim(); // 消息内容
   const room = msg.room(); // 是否是群消息
-  const alias = await contact.alias(); // 发消息人备注
+  const alias = await contact.alias() || await contact.name(); // 发消息人备注
   const isText = msg.type() === bot.Message.Type.Text;
   if (msg.self()) {
     return;
@@ -49,7 +49,7 @@ async function onMessage(msg) {
   if (room && isText) {
     // 如果是群消息 目前只处理文字消息
     const topic = await room.topic();
-    console.log(`群名: ${topic} 发消息人: ${contact.name()} 内容: ${content}`);
+    console.log(`群名: ${topic} 发消息人: ${await contact.name()} 内容: ${content}`);
   } else if (isText) {
     // 如果非群消息 目前只处理文字消息
     console.log(`发消息人: ${alias} 消息内容: ${content}`);
@@ -116,7 +116,7 @@ async function initDay() {
 
 const bot = new Wechaty({
   name: 'WechatEveryDay',
-  puppet: 'wechaty-puppet-puppeteer', // 如果有token，记得更换对应的puppet
+  puppet: 'wechaty-puppet-wechat', // 如果有token，记得更换对应的puppet
   // puppetOptions: {
   //   token: '如果有token，填入wechaty获取的token，并把注释放开'
   // }
