@@ -107,6 +107,7 @@ async function getReply(word) {
     }
     return response;
   } else {
+    console.log('天行接口请求错误', content)
     return '我好像迷失在无边的网络中了，你能找回我么';
   }
 }
