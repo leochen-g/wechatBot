@@ -54,7 +54,7 @@ docker run leochen/wechat-bot
 
 ```shell script
 docker push aibotk/wechat-bot
-docker run -v config目录的绝对路径:/home/app/config leochen/wechat-bot
+docker run -v config目录的绝对路径:/home/app/config aibotk/wechat-bot
 ```
 
 ## 安装配置

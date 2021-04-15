@@ -28,6 +28,7 @@ RUN echo "0. 设置 apt 使用镜像源，然后 update" \
     libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 \
     libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 \
     ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
+RUN export WECHATY_PUPPET=wechaty-puppet-wechat
 WORKDIR /home/app
 COPY --from=0 /home/app .
 COPY . .
