@@ -6,7 +6,7 @@
 ![](https://img.shields.io/badge/Mac-yellow.svg)
 ![](https://img.shields.io/badge/Centos-blue.svg)
 
-wechatBot 是基于 node 与[wechaty](https://github.com/Chatie/wechaty)的微信小情话工具。最初功能只有每日发送天气和一句情话，后来添加了智能机器人聊天功能，自动加群，自动加好友，定时助手功能等。但由于本项目面向小白用户与刚接触 node 开发的用户，故拆分了两个项目，一个是功能专一面向小白的[《微信每日说》](https://github.com/gengchen528/wechatBot)（也就是本项目），另一个也在我的仓库下[《智能微秘书》](https://github.com/gengchen528/wechat-assistant-pro)面向有较多编程经验的用户。下面主要介绍微信每日说的使用
+wechatBot 是基于 node 与 [wechaty](https://github.com/Chatie/wechaty) 的微信小情话工具。最初功能只有每日发送天气和一句情话，后来添加了智能机器人聊天功能，自动加群，自动加好友，定时助手功能等。但由于本项目面向小白用户与刚接触 node 开发的用户，故拆分了两个项目，一个是功能专一面向小白的[《微信每日说》](https://github.com/gengchen528/wechatBot)（也就是本项目），另一个也在我的仓库下[《智能微秘书》](https://github.com/gengchen528/wechat-assistant-pro)面向有较多编程经验的用户。下面主要介绍微信每日说的使用
 
 ### 主要功能
 
@@ -18,9 +18,19 @@ wechatBot 是基于 node 与[wechaty](https://github.com/Chatie/wechaty)的微�
 
 ### 可选聊天机器人
 
-- 天行机器人: 默认设置为天行机器人(智能化程度一般)，目前提供我个人的 key 免费给大家使用，不过还是建议大家自行注册自己账号 [天行数据官网](https://www.tianapi.com/signup.html?source=474284281)
+- 天行机器人: 默认设置为天行机器人(智能化程度一般)，还是建议大家自行注册自己账号 [天行数据官网](https://www.tianapi.com/signup.html?source=474284281)
 - 图灵机器人: 目前比较智能的机器人，但是需要注册后进行身份认证，才可调用，且每天只可免费调用 100 次（收费标准 99 元/月，每天 1000 次）[图灵官网](http://www.tuling123.com)
 - 天行对接的图灵机器人: 与图灵机器人智能程度相同，通过天行数据平台调用[详情介绍](https://www.tianapi.com/apiview/98)
+
+## 天行数据需要申请的api
+
+如遇到获取不到天气数据，或者机器人无法自动回复等问题，请登录天行数据个人中心查看是否申请了对应的接口权限，以下链接为快速申请链接：
+
+* 天行机器人： [https://www.tianapi.com/apiview/47](https://www.tianapi.com/apiview/47)
+* 天气查询：[https://www.tianapi.com/apiview/72](https://www.tianapi.com/apiview/72)
+* 垃圾分类： [https://www.tianapi.com/apiview/97](https://www.tianapi.com/apiview/97)
+* 土味情话： [https://www.tianapi.com/apiview/80](https://www.tianapi.com/apiview/80)
+* 天行图灵机器人: [https://www.tianapi.com/apiview/98](https://www.tianapi.com/apiview/98)
 
 ## 环境
 
@@ -131,21 +141,23 @@ npm
 
 问题解决基本方案
 
-- 先检查 node 版本是否大于 10
+- 先检查 node 版本是否大于 12
 - 确认 npm 或 yarn 已经配置好淘宝源
 - 存在 package-lock.json 文件先删除
 - 删除`node_modules`后重新执行`npm install` 或`cnpm install`
 - 使用最新版[《智能微秘书》](https://github.com/gengchen528/wechat-assistant-pro)，摆脱环境问题
 
 1.  我的微信号无法登陆
+    
+    最新版代码已经解决不能登录的问题，放心拉最新代码使用就行了
 
-    从 2017 年 6 月下旬开始，使用基于 web 版微信接入方案存在大概率的被限制登陆的可能性。 主要表现为：无法登陆 Web 微信，但不影响手机等其他平台。 验证是否被限制登陆： https://wx.qq.com 上扫码查看是否能登陆。 更多内容详见：
+    ~~从 2017 年 6 月下旬开始，使用基于 web 版微信接入方案存在大概率的被限制登陆的可能性。 主要表现为：无法登陆 Web 微信，但不影响手机等其他平台。 验证是否被限制登陆： https://wx.qq.com 上扫码查看是否能登陆。 更多内容详见：~~
 
-    [Can not login with error message: 当前登录环境异常。为了你的帐号安全，暂时不能登录 web 微信。](https://github.com/Chatie/wechaty/issues/603)
+    [~~Can not login with error message: 当前登录环境异常。为了你的帐号安全，暂时不能登录 web 微信。~~](https://github.com/Chatie/wechaty/issues/603)
 
     [[谣言] 微信将会关闭网页版本](https://github.com/Chatie/wechaty/issues/990)
 
-    [新注册的微信号无法登陆](https://github.com/Chatie/wechaty/issues/872)
+    [~~新注册的微信号无法登陆~~](https://github.com/Chatie/wechaty/issues/872)
 
 2.  类似 Failed to download Chromium rxxx 的问题
     `ERROR: Failed to download Chromium r515411! Set "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD" env variable to skip download.{ Error: read ETIMEDOUT at _errnoException (util.js:1041:11) at TLSWrap.onread (net.js:606:25) code: 'ETIMEDOUT', errno: 'ETIMEDOUT', syscall: 'read' }`
@@ -182,11 +194,11 @@ npm
       ![](http://image.bloggeng.com/14241551970542_.pic_hd.jpg)
 
     - 下载 puppeteer 失败,Linux 和 Mac 执行以下命令
-      `PUPPETEER_DOWNLOAD_HOST = https://npm.taobao.org/mirrors npm install wechaty-puppet-puppeteer`
+      `PUPPETEER_DOWNLOAD_HOST = https://npm.taobao.org/mirrors npm install wechaty-puppet-wechat`
 
     - 下载 puppeteer 失败,Windows 执行以下命令
 
-      `SET PUPPETEER_DOWNLOAD_HOST = https://npm.taobao.org/mirrors npm install wechaty-puppet-puppeteer`
+      `SET PUPPETEER_DOWNLOAD_HOST = https://npm.taobao.org/mirrors npm install wechaty-puppet-wechat`
 
 4.  如图所示问题解决办法，关闭 win/mac 防火墙；如果公司网络有限制的话也可能引起无法启动问题
     ![](http://image.bloggeng.com/WechatIMG7619.png)
@@ -196,7 +208,7 @@ npm
 
 6.  更多关于 wechaty 功能相关接口
 
-    [参考 wechaty 官网文档](https://docs.chatie.io/v/zh/)
+    [参考 wechaty 官网文档](https://wechaty.js.org/docs/)
 
 7.  也可添加小助手微信后，发送`'加群'`进入微信每日说技术交流群
 
@@ -207,15 +219,13 @@ npm
 
 ## 最后
 
-因为给这个微信加了自动加好友和拉群功能，所以有兴趣的小伙伴可以加我的微信小号，加好友后发送`加群`，会自动发送群的二维码，同时此小号有更多高级功能等待你的发现。
+加好友后发送`加群`，会自动拉你进入群聊，同时此微信号有更多高级功能等待你的发现。
 
 ![](https://user-gold-cdn.xitu.io/2019/2/28/1693401c6c3e6b02?w=430&h=430&f=png&s=53609)
 
 赶快亲自试一试吧，相信你会挖掘出更多好玩的功能
 
-github:[https://github.com/gengchen528/wechatBot](https://github.com/gengchen528/wechatBot)
-
-另外我的公众号已经接入微软小冰，关注后发语音会有小姐姐的声音陪你聊天，也可以和她文字聊天，有兴趣可以试试看，单身的欢迎来撩
+关注公众号：随时获取最新消息
 
 ![](https://user-gold-cdn.xitu.io/2019/3/1/169381d277ba6401?w=258&h=258&f=png&s=42373)
 

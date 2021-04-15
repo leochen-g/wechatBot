@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:14
 LABEL maintainer="Leo_chen <chengeng@aibotk.com>"
 WORKDIR /home/app
 COPY package.json ./
@@ -8,7 +8,7 @@ RUN npm config set registry https://registry.npm.taobao.org \
 RUN  npm install \
      && npm run puppet-install
 
-FROM node:10
+FROM node:14
 ENV APT_SOURCE_HOST="mirrors.aliyun.com"
 ## 清华镜像源（备选）
 # ENV APT_SOURCE_HOST=mirrors.tuna.tsinghua.edu.cn

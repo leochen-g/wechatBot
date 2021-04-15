@@ -2,7 +2,7 @@
  * WechatBot
  *  - https://github.com/gengchen528/wechatBot
  */
-const { Wechaty, Friendship } = require('wechaty');
+const { Wechaty } = require('wechaty');
 const schedule = require('./schedule/index');
 const config = require('./config/index');
 const untils = require('./utils/index');
@@ -102,7 +102,7 @@ async function initDay() {
     let today = await untils.formatDate(new Date()); //获取今天的日期
     let memorialDay = untils.getDay(config.MEMORIAL_DAY); //获取纪念日天数
     let sweetWord = await superagent.getSweetWord();
-    let str = `${today}<br>我们在一起的第${memorialDay}天<br><br>元气满满的一天开始啦,要开心噢^_^<br><br>今日天气<br>${weather.weatherTips}<br>${weather.todayWeather}<br>每日一句:<br>${one}<br><br>每日土味情话：<br>${sweetWord}<br><br>————————最爱你的我`;
+    let str = `${today}\n我们在一起的第${memorialDay}天\n\n元气满满的一天开始啦,要开心噢^_^\n\n今日天气\n${weather.weatherTips}\n${weather.todayWeather}\n每日一句:\n${one}\n\n每日土味情话：\n${sweetWord}\n\n————————最爱你的我`;
     try {
       logMsg = str;
       await delay(2000);

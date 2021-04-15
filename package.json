@@ -23,6 +23,6 @@
         "qrcode-terminal": "^0.12.0",
         "superagent": "^4.1.0",
         "wechaty": "^0.57.19",
-        "wechaty-puppet-wechat": "^0.27.1"
+        "wechaty-puppet-wechat": "^0.28.1"
     }
 }
