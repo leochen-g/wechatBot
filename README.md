@@ -39,22 +39,22 @@ wechatBot 是基于 node 与 [wechaty](https://github.com/Chatie/wechaty) 的微
 
 ## docker 部署（新增）
 
-### 自行构建镜像
+### 自行构建镜像（推荐）
 
 需要提前安装 docker 环境，并且配置好`config/index.js`中内容
 
 ```shell script
-docker build -t leochen/wechat-bot .
-docker run leochen/wechat-bot
+docker build -t wechat-bot .
+docker run wechat-bot
 ```
 
-### 拉取已 build 镜像（推荐）
+### 拉取已 build 镜像
 
 首先创建一个`config`目录,里面创建`index.js`文件后，把项目配置内容拷贝到`index.js`文件中，修改对应参数
 
 ```shell script
 docker push aibotk/wechat-bot
-docker run -v config目录的绝对路径:/home/app/config aibotk/wechat-bot
+docker run -v config目录的绝对路径:/bot/wechatBot/config aibotk/wechat-bot
 ```
 
 ## 安装配置
