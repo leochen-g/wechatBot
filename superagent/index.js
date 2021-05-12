@@ -36,6 +36,7 @@ async function getTXweather() {
                 city: config.CITY
             }
         });
+
         if (content.code === 200) {
             let todayInfo = content.newslist[0];
             let obj = {
@@ -60,6 +61,7 @@ async function getTXTLReply(word) {
             userid: uniqueId
         }
     });
+
     if (content.code === 200) {
         let response = content.newslist[0].reply;
         console.log('天行对接的图灵机器人:', content);
@@ -79,6 +81,7 @@ async function getTuLingReply(word) {
         },
         platform: 'tl'
     });
+
     if (content.code === 100000) {
         return content.text;
     } else {
@@ -98,6 +101,7 @@ async function getReply(word) {
             userid: uniqueId
         }
     });
+
     if (content.code === 200) {
         let res = content.newslist[0]
         let response = '';
@@ -139,6 +143,7 @@ async function getSweetWord() {
 async function getRubbishType(word) {
     let url = TXHOST + 'lajifenlei/';
     let content = await superagent.req({url, method: 'GET', params: {key: config.TXAPIKEY, word: word}});
+    
     if (content.code === 200) {
         let type;
         if (content.newslist[0].type == 0) {
