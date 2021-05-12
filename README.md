@@ -74,7 +74,7 @@ docker run -v config目录的绝对路径:/bot/wechatBot/config aibotk/wechat-bo
 
 配置 `npm` 源为淘宝源（重要，因为需要安装 `chromium`，不配置的话下载会失败或者速度很慢，因为这个玩意 140M 左右）
 
-```bsah
+```bash
 npm config set registry https://registry.npm.taobao.org
 npm config set disturl https://npm.taobao.org/dist
 npm config set puppeteer_download_host https://npm.taobao.org/mirrors
@@ -141,7 +141,7 @@ npm install
 
 ## 常见问题处理 (FAQ)
 
-问题解决基本方案
+问题解决基本方案:
 
 - 先检查 node 版本是否大于 12, 且不能超过 14
 - 确认 npm 或 yarn 已经配置好淘宝源
