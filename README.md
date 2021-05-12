@@ -34,8 +34,8 @@ wechatBot 是基于 node 与 [wechaty](https://github.com/Chatie/wechaty) 的微
 
 ## 环境
 
-- node.js (version >= 12)
-- Mac/Linux/Windows
+- `node.js` ( 12 ≤ version ≤ 14, 推荐使用 **V14**, 实测 V15 安装会报错)
+- `Mac / Linux / Windows`
 
 ## docker 部署（新增）
 
@@ -43,7 +43,8 @@ wechatBot 是基于 node 与 [wechaty](https://github.com/Chatie/wechaty) 的微
 
 需要提前安装 docker 环境，并且配置好`config/index.js`中内容
 
-```shell script
+```bash
+# 编译镜像并运行
 docker build -t wechat-bot .
 docker run wechat-bot
 ```
@@ -52,7 +53,7 @@ docker run wechat-bot
 
 首先创建一个`config`目录,里面创建`index.js`文件后，把项目配置内容拷贝到`index.js`文件中，修改对应参数
 
-```shell script
+```bash
 docker push aibotk/wechat-bot
 docker run -v config目录的绝对路径:/bot/wechatBot/config aibotk/wechat-bot
 ```
@@ -65,35 +66,36 @@ docker run -v config目录的绝对路径:/bot/wechatBot/config aibotk/wechat-bo
 
 访问 node 官网：[http://nodejs.cn/download/](http://nodejs.cn/download/)，下载系统对应版本的 node 安装包，并执行安装。
 
-> 1、windows 下安装 node 步骤详细参考 [https://www.cnblogs.com/liuqiyun/p/8133904.html](https://www.cnblogs.com/liuqiyun/p/8133904.html)
-
-> 2、Mac 下安装 node 详细步骤参考 [https://blog.csdn.net/qq_32407233/article/details/83758899](https://blog.csdn.net/qq_32407233/article/details/83758899)
-
-> 3、Linux 下安装 node 详细步骤参考 [https://www.cnblogs.com/liuqi/p/6483317.html](https://www.cnblogs.com/liuqi/p/6483317.html)
+> 1. windows 下安装步骤详细参考 [NodeJs 安装 Windwos 篇](https://www.cnblogs.com/liuqiyun/p/8133904.html)
+> 2. Mac 下安装详细步骤参考 [NodeJs 安装 Mac 篇](https://blog.csdn.net/qq_32407233/article/details/83758899)
+> 3. Linux 下安装详细步骤参考 [NodeJs 安装 Linux 篇](https://www.cnblogs.com/liuqi/p/6483317.html)
 
 ### 配置 npm 源
 
-配置 npm 源为淘宝源（重要，因为需要安装 chromium，不配置的话下载会失败或者速度很慢，因为这个玩意 140M 左右）
+配置 `npm` 源为淘宝源（重要，因为需要安装 `chromium`，不配置的话下载会失败或者速度很慢，因为这个玩意 140M 左右）
 
-npm
-
-    npm config set registry https://registry.npm.taobao.org
-    npm config set disturl https://npm.taobao.org/dist
-    npm config set puppeteer_download_host https://npm.taobao.org/mirrors
+```bsah
+npm config set registry https://registry.npm.taobao.org
+npm config set disturl https://npm.taobao.org/dist
+npm config set puppeteer_download_host https://npm.taobao.org/mirrors
+```
 
 ### 下载代码
 
-![](https://user-gold-cdn.xitu.io/2019/6/16/16b5fcb3ea7ee507?w=1917&h=937&f=png&s=180655)
+![download-project](https://user-gold-cdn.xitu.io/2019/6/16/16b5fcb3ea7ee507?w=1917&h=937&f=png&s=180655)
 
-    git clone git@github.com:gengchen528/wechatBot.git（如果没有安装git，也可直接下载项目zip包）
-    cd wechatBot
-    npm install
+```bash
+# 如果没有安装 git，也可直接下载项目zip包
+git clone https://github.com/gengchen528/wechatBot.git
+cd wechatBot
+npm install
+```
 
 ### 项目配置
 
-所有配置项均在 config/index.js 文件中
+所有配置项均在 `config/index.js` 文件中
 
-```
+```javascript
   // 配置文件
   module.exports = {
       // 每日说配置项（必填项）
@@ -101,11 +103,11 @@ npm
       NICKNAME: 'leo助手', //女朋友昵称
       MEMORIAL_DAY: '2015/04/18', //你和女朋友的纪念日
       CITY: '上海', //女朋友所在城市（城市名称，不要带“市”）
-      SENDDATE: '0 09 14 * * *', //定时发送时间 每天8点06分0秒发送，规则见 /schedule/index.js
+      SENDDATE: '0 6 8 * * *', //定时发送时间 每天8点06分0秒发送，规则见 /schedule/index.js
       TXAPIKEY: '', //此处须填写个人申请的天行apikey,请替换成自己的（自行申请天行天气和土味情话的接口） 申请地址https://www.tianapi.com/signup.html?source=474284281
 
       //高级功能配置项（非必填项）
-      AUTOREPLY: false, //自动聊天功能 默认关闭 开启设置为: true
+      AUTOREPLY: true, //自动聊天功能 默认开启, 关闭设置为 false
       DEFAULTBOT: '0', //设置默认聊天机器人 0 天行机器人 1 图灵机器人 2 天行对接的图灵机器人，需要到天行机器人官网充值（50元/年，每天1000次）
       AUTOREPLYPERSON: ['好友1备注','好友2备注'], //指定多个好友开启机器人聊天功能   指定好友的备注，最好不要带有特殊字符
       TULINGKEY: '图灵机器人apikey',//图灵机器人apikey,需要自己到图灵机器人官网申请，并且需要认证
@@ -137,17 +139,17 @@ npm
 <img style="width:43%;display:inline-block;" src="https://user-gold-cdn.xitu.io/2019/6/16/16b5fbdd0d8cf81f?w=401&h=592&f=png&s=55280" >
 </div>
 
-## 常见问题处理
+## 常见问题处理 (FAQ)
 
 问题解决基本方案
 
-- 先检查 node 版本是否大于 12
+- 先检查 node 版本是否大于 12, 且不能超过 14
 - 确认 npm 或 yarn 已经配置好淘宝源
 - 存在 package-lock.json 文件先删除
 - 删除`node_modules`后重新执行`npm install` 或`cnpm install`
 - 使用最新版[《智能微秘书》](https://github.com/gengchen528/wechat-assistant-pro)，摆脱环境问题
 
-1.  我的微信号无法登陆
+1. 我的微信号无法登陆
     
     最新版代码已经解决不能登录的问题，放心拉最新代码使用就行了
 
@@ -159,7 +161,7 @@ npm
 
     [~~新注册的微信号无法登陆~~](https://github.com/Chatie/wechaty/issues/872)
 
-2.  类似 Failed to download Chromium rxxx 的问题
+2. 类似 Failed to download Chromium rxxx 的问题
     `ERROR: Failed to download Chromium r515411! Set "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD" env variable to skip download.{ Error: read ETIMEDOUT at _errnoException (util.js:1041:11) at TLSWrap.onread (net.js:606:25) code: 'ETIMEDOUT', errno: 'ETIMEDOUT', syscall: 'read' }`
 
     解决方案：[https://github.com/GoogleChrome/puppeteer/issues/1597](https://github.com/GoogleChrome/puppeteer/issues/1597)
@@ -168,7 +170,7 @@ npm
 
     `sudo npm install puppeteer --unsafe-perm=true --allow-root`
 
-3.  执行 npm run start 时无法安装 puppet-puppeteer&&Chromium
+3. 执行 `npm run start` 时无法安装 puppet-puppeteer&&Chromium
 
     - Centos7 下部署出现以下问题
       ![](http://image.bloggeng.com/14481551970095_.pic_hd.jpg)
@@ -200,17 +202,17 @@ npm
 
       `SET PUPPETEER_DOWNLOAD_HOST = https://npm.taobao.org/mirrors npm install wechaty-puppet-wechat`
 
-4.  如图所示问题解决办法，关闭 win/mac 防火墙；如果公司网络有限制的话也可能引起无法启动问题
+4. 如图所示问题解决办法，关闭 win / mac 防火墙；如果公司网络有限制的话也可能引起无法启动问题
     ![](http://image.bloggeng.com/WechatIMG7619.png)
-5.  支持 红包、转账、朋友圈… 吗
+5. 支持 红包、转账、朋友圈… 吗 ?
 
     支付相关 - 红包、转账、收款 等都不支持
 
-6.  更多关于 wechaty 功能相关接口
+6. 更多关于 wechaty 功能相关接口
 
     [参考 wechaty 官网文档](https://wechaty.js.org/docs/)
 
-7.  也可添加小助手微信后，发送`'加群'`进入微信每日说技术交流群
+7. 也可添加小助手微信后，发送`'加群'`进入微信每日说技术交流群
 
 ## 注意
 

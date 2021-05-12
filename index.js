@@ -11,13 +11,14 @@ const superagent = require('./superagent/index');
 // 延时函数，防止检测出类似机器人行为操作
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-//  二维码生成
+// 二维码生成
 function onScan(qrcode, status) {
   require('qrcode-terminal').generate(qrcode); // 在console端显示二维码
   const qrcodeImageUrl = [
     'https://api.qrserver.com/v1/create-qr-code/?data=',
     encodeURIComponent(qrcode),
   ].join('');
+
   console.log(qrcodeImageUrl);
 }
 
@@ -27,11 +28,12 @@ async function onLogin(user) {
   if (config.AUTOREPLY) {
     console.log(`已开启机器人自动聊天模式`);
   }
+
   // 登陆后创建定时任务
   await initDay();
 }
 
-//登出
+// 登出
 function onLogout(user) {
   console.log(`小助手${user} 已经登出`);
 }
@@ -46,6 +48,7 @@ async function onMessage(msg) {
   if (msg.self()) {
     return;
   }
+  
   if (room && isText) {
     // 如果是群消息 目前只处理文字消息
     const topic = await room.topic();
@@ -91,6 +94,7 @@ async function onMessage(msg) {
 // 创建微信每日说定时任务
 async function initDay() {
   console.log(`已经设定每日说任务`);
+  
   schedule.setSchedule(config.SENDDATE, async () => {
     console.log('你的贴心小助理开始工作啦！');
     let logMsg;
@@ -102,6 +106,9 @@ async function initDay() {
     let today = await untils.formatDate(new Date()); //获取今天的日期
     let memorialDay = untils.getDay(config.MEMORIAL_DAY); //获取纪念日天数
     let sweetWord = await superagent.getSweetWord();
+    
+    // 你可以修改下面的 str 来自定义每日说的内容和格式
+    // PS: 如果需要插入 emoji(表情), 可访问 "https://getemoji.com/" 复制插入
     let str = `${today}\n我们在一起的第${memorialDay}天\n\n元气满满的一天开始啦,要开心噢^_^\n\n今日天气\n${weather.weatherTips}\n${weather.todayWeather}\n每日一句:\n${one}\n\n每日土味情话：\n${sweetWord}\n\n————————最爱你的我`;
     try {
       logMsg = str;
