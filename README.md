@@ -204,6 +204,7 @@ npm install
 
 4. 如图所示问题解决办法，关闭 win / mac 防火墙；如果公司网络有限制的话也可能引起无法启动问题
     ![](http://image.bloggeng.com/WechatIMG7619.png)
+
 5. 支持 红包、转账、朋友圈… 吗 ?
 
     支付相关 - 红包、转账、收款 等都不支持
@@ -211,8 +212,12 @@ npm install
 6. 更多关于 wechaty 功能相关接口
 
     [参考 wechaty 官网文档](https://wechaty.js.org/docs/)
+    
+7. 希望输出运行日志相关 DEBUG 信息, 并保存到本地
+   - 在运行前, 系统里输入 `export WECHATY_LOG=verbose` 就能将默认日志输出改为详细 (其他等级参考[官方文档](https://www.npmjs.com/package/brolog#loglevelnewlevel)) 
+   - 保存到本地, 在支持 `bash` 环境的命令行中, 可以用这样的方式启动程序: `node index.js 2>&1 | tee bot.log`, 这样控制台和后台会同时显示/存储日志信息.
 
-7. 也可添加小助手微信后，发送`'加群'`进入微信每日说技术交流群
+有其他问题也可添加小助手微信后，发送`'加群'`进入微信每日说技术交流群
 
 ## 注意
 
