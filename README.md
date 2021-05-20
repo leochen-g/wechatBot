@@ -6,23 +6,25 @@
 ![](https://img.shields.io/badge/Mac-yellow.svg)
 ![](https://img.shields.io/badge/Centos-blue.svg)
 
-wechatBot 是基于 node 与 [wechaty](https://github.com/Chatie/wechaty) 的微信小情话工具。最初功能只有每日发送天气和一句情话，后来添加了智能机器人聊天功能，自动加群，自动加好友，定时助手功能等。但由于本项目面向小白用户与刚接触 node 开发的用户，故拆分了两个项目，一个是功能专一面向小白的[《微信每日说》](https://github.com/gengchen528/wechatBot)（也就是本项目），另一个也在我的仓库下[《智能微秘书》](https://github.com/gengchen528/wechat-assistant-pro)面向有较多编程经验的用户。下面主要介绍微信每日说的使用
+wechatBot 是基于 node 与 [wechaty](https://github.com/Chatie/wechaty) 的微信小情话工具。最初功能只有每日发送天气和一句情话，后来添加了智能机器人聊天功能。但由于本项目面向小白用户与刚接触 node 开发的用户，故拆分了两个项目，一个是功能专一面向小白的 [《微信每日说》](https://github.com/gengchen528/wechatBot) （也就是本项目） ，另一个也在我的仓库下 [《智能微秘书》](https://github.com/gengchen528/wechat-assistant-pro) 面向有较多编程经验的用户。下面主要介绍微信每日说的使用
+
+## 最新通知 喜大普奔
+
+由于wechaty的升级，现已支持所有微信登录，就算你的微信之前不能登录web版，现在也可以用了，赶快来体验吧。
 
 ### 主要功能
 
-- 定时给女朋友发送每日天气提醒，以及每日一句
-- 天行机器人自动陪女朋友聊天（需要自己申请[天行机器人](https://www.tianapi.com/signup.html?source=474284281)api，不过目前开源的机器人 api 都不要抱太大希望，因为很傻的，如果你有发现好的机器人可以来推荐）
-- 垃圾分类功能，使用方法：？垃圾名称
-- 最近看到 python 版支持多女朋友配置，我思考了一下，还是不要加了比较好，我们要做一个专一的人，哈哈
-- 想要更多群管理，自动加好友功能，并体验在线配置服务，请移步[《智能微秘书》](https://github.com/gengchen528/wechat-assistant-pro)
+- [x] 定时给女朋友发送每日天气提醒，以及每日一句
+- [x] 天行机器人自动陪女朋友聊天（需要自己申请[天行机器人](https://www.tianapi.com/signup.html?source=474284281)api，不过目前开源的机器人 api 都不要抱太大希望，因为很傻的，如果你有发现好的机器人可以来推荐）
+- [x] 垃圾分类功能，使用方法：？垃圾名称
+- [x] 想要更多群管理，自动加好友功能，群定时任务，好友定时任务，并体验在线配置服务，请移步[《智能微秘书》](https://github.com/gengchen528/wechat-assistant-pro)
 
 ### 可选聊天机器人
 
 - 天行机器人: 默认设置为天行机器人(智能化程度一般)，还是建议大家自行注册自己账号 [天行数据官网](https://www.tianapi.com/signup.html?source=474284281)
 - 图灵机器人: 目前比较智能的机器人，但是需要注册后进行身份认证，才可调用，且每天只可免费调用 100 次（收费标准 99 元/月，每天 1000 次）[图灵官网](http://www.tuling123.com)
-- 天行对接的图灵机器人: 与图灵机器人智能程度相同，通过天行数据平台调用[详情介绍](https://www.tianapi.com/apiview/98)
 
-## 天行数据需要申请的api
+## 天行数据需要申请的api （重要）
 
 如遇到获取不到天气数据，或者机器人无法自动回复等问题，请登录天行数据个人中心查看是否申请了对应的接口权限，以下链接为快速申请链接：
 
@@ -34,28 +36,56 @@ wechatBot 是基于 node 与 [wechaty](https://github.com/Chatie/wechaty) 的微
 
 ## 环境
 
-- `node.js` ( 12 ≤ version ≤ 14, 推荐使用 **V14**, 实测 V15 安装会报错)
+- `node.js` ( 12 ≤ version ≤ 14, 推荐使用 **V14**)
 - `Mac / Linux / Windows`
 
-## docker 部署（新增）
+## docker 部署
 
-### 自行构建镜像（推荐）
+### 直接拉取镜像（推荐）
 
-需要提前安装 docker 环境，并且配置好`config/index.js`中内容
+由于自己构建部分依赖安装比较慢，或者经常会卡住，所以本项目已经提前构建好发布到dockerhub了，直接pull就行了
 
-```bash
-# 编译镜像并运行
-docker build -t wechat-bot .
-docker run wechat-bot
+#### step1： 拉取镜像
+
+```shell
+
+docker pull aibotk/wechat-bot
+
 ```
 
-### 拉取已 build 镜像
+#### step2： 配置`config/index.js`
 
-首先创建一个`config`目录,里面创建`index.js`文件后，把项目配置内容拷贝到`index.js`文件中，修改对应参数
+目录`config/index.js`中的内容按照说明配置，请注意阅读说明
 
-```bash
-docker push aibotk/wechat-bot
-docker run -v config目录的绝对路径:/bot/wechatBot/config aibotk/wechat-bot
+#### step3： 启动docker
+
+以下两个命令自己选择一个执行就行，执行的时候会下载puppet，可能会比较慢，耐心等待一下即可
+
+1、请在项目根目录执行，这个命令是前台执行可以直接看到log日志的，但是没法关闭，只能销毁终端实例
+
+```shell
+
+docker run --name=chatBot --volume="$(pwd)/config/":/bot/config aibotk/wechat-bot
+
+```
+
+2、这个命令可以在后台运行，多了一个`-d`
+
+```shell
+
+docker run -d --name=chatBot --volume="$(pwd)/config/":/bot/config aibotk/wechat-bot
+
+```
+
+[如何查看docker日志](https://www.cnblogs.com/mydesky2012/p/11430394.html)
+
+### 自行构建docker镜像 （不建议）
+
+需要提前安装 docker 环境，并且配置好`config/index.js`中的内容
+
+```shell script
+docker build -t wechat-bot .
+docker run wechat-bot
 ```
 
 ## 安装配置
@@ -256,6 +286,10 @@ npm install
 </div>
 
 ## 更新日志
+
+2021-05-20
+
+- 添加docker支持，摆脱环境困扰
 
 2021-04-13
 
