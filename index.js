@@ -25,6 +25,8 @@ function onScan(qrcode, status) {
 // 登录
 async function onLogin(user) {
   console.log(`贴心小助理${user}登录了`);
+  const date = new Date()
+  console.log(`当前容器时间:${date}`);
   if (config.AUTOREPLY) {
     console.log(`已开启机器人自动聊天模式`);
   }
