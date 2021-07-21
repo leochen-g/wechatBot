@@ -247,6 +247,20 @@ npm install
    - 在运行前, 系统里输入 `export WECHATY_LOG=verbose` 就能将默认日志输出改为详细 (其他等级参考[官方文档](https://www.npmjs.com/package/brolog#loglevelnewlevel)) 
    - 保存到本地, 在支持 `bash` 环境的命令行中, 可以用这样的方式启动程序: `node index.js 2>&1 | tee bot.log`, 这样控制台和后台会同时显示/存储日志信息.
 
+8 .CentOS 安装 better-sqlite3 报错的问题
+
+* 首先执行 `sudo yum install centos-release-scl-rh`，`sudo yum install devtoolset-8-build `这两个方法
+
+* 安装相应的gdb，`sudo yum install devtoolset-8-gdb`
+  
+* 同样，也可以安装相应版本的 gcc 和 g++，`sudo yum install devtoolset-8-gcc devtoolset-8-gcc-c++`
+
+* yum安装完后，原来的gcc不覆盖，所以需要执行enable脚本更新环境变量，`sudo source /opt/rh/devtoolset-8/enable`
+
+* 可以通过加入到profile里面开机自动`source, vim /etc/profile`, 跳到最后一行加入以下内容，`source /opt/rh/devtoolset-8/enable`
+
+参考文章 [better-sqlite3](https://www.cnblogs.com/clwsec/p/12493653.html)
+
 有其他问题也可添加小助手微信后，发送`'加群'`进入微信每日说技术交流群
 
 ## 注意
