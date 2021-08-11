@@ -65,7 +65,7 @@ docker pull aibotk/wechat-bot
 
 ```shell
 
-docker run --name=chatBot --volume="$(pwd)/config/":/bot/config aibotk/wechat-bot
+docker run -e TZ="Asia/Shanghai" --name=chatBot --volume="$(pwd)/config/":/bot/config aibotk/wechat-bot
 
 ```
 
@@ -73,7 +73,7 @@ docker run --name=chatBot --volume="$(pwd)/config/":/bot/config aibotk/wechat-bo
 
 ```shell
 
-docker run -d --name=chatBot --volume="$(pwd)/config/":/bot/config aibotk/wechat-bot
+docker run -e TZ="Asia/Shanghai" -d --name=chatBot --volume="$(pwd)/config/":/bot/config aibotk/wechat-bot
 
 ```
 
