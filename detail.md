@@ -228,14 +228,14 @@ superagent/index.js
 
 npm
 
-    npm config set registry https://registry.npm.taobao.org
-    npm config set disturl https://npm.taobao.org/dist
-    npm config set puppeteer_download_host https://npm.taobao.org/mirrors
+    npm config set registry https://registry.npmmirror.com
+    npm config set disturl https://npmmirror.com/dist
+    npm config set puppeteer_download_host https://npmmirror.com/mirrors
 yarn
 
-    yarn config set registry https://registry.npm.taobao.org
-    yarn config set disturl https://npm.taobao.org/dist
-    yarn config set puppeteer_download_host https://npm.taobao.org/mirrors
+    yarn config set registry https://registry.npmmirror.com
+    yarn config set disturl https://npmmirror.com/dist
+    yarn config set puppeteer_download_host https://npmmirror.com/mirrors
 然后进行项目安装
 
     git clone git@github.com:gengchen528/wechatBot.git
