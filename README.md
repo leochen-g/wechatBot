@@ -1,20 +1,20 @@
 ## 微信每日说
 
-[![node version](https://img.shields.io/badge/node-%3E%3D12-blue.svg)](http://nodejs.cn/download/)
-[![node version](https://img.shields.io/badge/wechaty-%3E%3D0.57.19-blue.svg)](https://github.com/Chatie/wechaty)
+[![node version](https://img.shields.io/badge/node-%3E%3D16-blue.svg)](http://nodejs.cn/download/)
+[![node version](https://img.shields.io/badge/wechaty-%3E%3D1.20.2-blue.svg)](https://github.com/Chatie/wechaty)
 ![](https://img.shields.io/badge/Window-green.svg)
 ![](https://img.shields.io/badge/Mac-yellow.svg)
 ![](https://img.shields.io/badge/Centos-blue.svg)
 
 wechatBot 是基于 node 与 [wechaty](https://github.com/Chatie/wechaty) 的微信小情话工具。最初功能只有每日发送天气和一句情话，后来添加了智能机器人聊天功能。但由于本项目面向小白用户与刚接触 node 开发的用户，故拆分了两个项目，一个是功能专一面向小白的 [《微信每日说》](https://github.com/gengchen528/wechatBot) （也就是本项目） ，另一个也在我的仓库下 [《智能微秘书》](https://github.com/gengchen528/wechat-assistant-pro) 面向有较多编程经验的用户。下面主要介绍微信每日说的使用
 
-## ~~最新通知 喜大普奔~~
+## 最新通知 喜大普奔
 
-~~由于wechaty的升级，现已支持所有微信登录，就算你的微信之前不能登录web版，现在也可以用了，赶快来体验吧。~~
+由于wechaty的升级，现已支持所有微信登录，就算你的微信之前不能登录web版，现在也可以用了，赶快来体验吧。
 
-### 遗憾的通知
+### ~~遗憾的通知~~
 
-由于UOS桌面版协议微信已经关闭了，没法再继续用桌面版协议登录了，现在只能换回web协议了。可以登录网页版微信的账号可以继续用，不能登录网页版协议的就不能用了。或者你可以申请Wechaty 的ipad local协议的token可以免费试用7天 。申请地址:  https://github.com/padlocal/wechaty-puppet-padlocal
+uos 又可以重新使用了~~由于UOS桌面版协议微信已经关闭了，没法再继续用桌面版协议登录了，现在只能换回web协议了。可以登录网页版微信的账号可以继续用，不能登录网页版协议的就不能用了。或者你可以申请Wechaty 的ipad local协议的token可以免费试用7天 。申请地址:  https://github.com/padlocal/wechaty-puppet-padlocal~~
 
 ### 主要功能
 
@@ -40,7 +40,7 @@ wechatBot 是基于 node 与 [wechaty](https://github.com/Chatie/wechaty) 的微
 
 ## 环境
 
-- `node.js` ( 12 ≤ version ≤ 14, 推荐使用 **V14**)
+- `node.js` ( 16 > version, 推荐使用 **V16**)
 - `Mac / Linux / Windows`
 
 ## docker 部署
@@ -109,7 +109,7 @@ docker run wechat-bot
 配置 `npm` 源为淘宝源（重要，因为需要安装 `chromium`，不配置的话下载会失败或者速度很慢，因为这个玩意 140M 左右）
 
 ```bash
-npm config set registry https://registry.npm.taobao.org
+npm config set registry https://registry.npmmirror.com/
 npm config set disturl https://npm.taobao.org/dist
 npm config set puppeteer_download_host https://npm.taobao.org/mirrors
 ```
@@ -120,7 +120,7 @@ npm config set puppeteer_download_host https://npm.taobao.org/mirrors
 
 ```bash
 # 如果没有安装 git，也可直接下载项目zip包
-git clone https://github.com/gengchen528/wechatBot.git
+git clone https://github.com/leochen-g/wechatBot.git
 cd wechatBot
 npm install
 ```
@@ -177,11 +177,11 @@ npm install
 
 问题解决基本方案:
 
-- 先检查 node 版本是否大于 12, 且不能超过 14
+- 先检查 node 版本是否大于 16
 - 确认 npm 或 yarn 已经配置好淘宝源
 - 存在 package-lock.json 文件先删除
 - 删除`node_modules`后重新执行`npm install` 或`cnpm install`
-- 使用最新版[《智能微秘书》](https://github.com/gengchen528/wechat-assistant-pro)，摆脱环境问题
+- 使用最新版[《智能微秘书》](https://github.com/leochen-g/wechat-assistant-pro)，摆脱环境问题
 
 1. 我的微信号无法登陆
     
@@ -304,6 +304,10 @@ npm install
 </div>
 
 ## 更新日志
+
+2022-07-15
+
+- 升级Wechaty 到1.x，支持UOS协议
 
 2021-05-20
 

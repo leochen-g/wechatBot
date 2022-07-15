@@ -2,7 +2,7 @@
  * WechatBot
  *  - https://github.com/gengchen528/wechatBot
  */
-const { Wechaty } = require('wechaty');
+const { WechatyBuilder } = require('wechaty');
 const schedule = require('./schedule/index');
 const config = require('./config/index');
 const untils = require('./utils/index');
@@ -50,7 +50,7 @@ async function onMessage(msg) {
   if (msg.self()) {
     return;
   }
-  
+
   if (room && isText) {
     // 如果是群消息 目前只处理文字消息
     const topic = await room.topic();
@@ -96,7 +96,7 @@ async function onMessage(msg) {
 // 创建微信每日说定时任务
 async function initDay() {
   console.log(`已经设定每日说任务`);
-  
+
   schedule.setSchedule(config.SENDDATE, async () => {
     console.log('你的贴心小助理开始工作啦！');
     let logMsg;
@@ -108,7 +108,7 @@ async function initDay() {
     let today = await untils.formatDate(new Date()); //获取今天的日期
     let memorialDay = untils.getDay(config.MEMORIAL_DAY); //获取纪念日天数
     let sweetWord = await superagent.getSweetWord();
-    
+
     // 你可以修改下面的 str 来自定义每日说的内容和格式
     // PS: 如果需要插入 emoji(表情), 可访问 "https://getemoji.com/" 复制插入
     let str = `${today}\n我们在一起的第${memorialDay}天\n\n元气满满的一天开始啦,要开心噢^_^\n\n今日天气\n${weather.weatherTips}\n${weather.todayWeather}\n每日一句:\n${one}\n\n每日土味情话：\n${sweetWord}\n\n————————最爱你的我`;
@@ -123,13 +123,13 @@ async function initDay() {
   });
 }
 
-const bot = new Wechaty({
+const bot = WechatyBuilder.build({
   name: 'WechatEveryDay',
   puppet: 'wechaty-puppet-wechat', // 如果有token，记得更换对应的puppet
-  // puppetOptions: {
-  //   token: '如果有token，填入wechaty获取的token，并把注释放开'
-  // }
-});
+  puppetOptions: {
+    uos: true
+  }
+})
 
 bot.on('scan', onScan);
 bot.on('login', onLogin);
