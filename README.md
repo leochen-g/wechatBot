@@ -305,6 +305,10 @@ npm install
 
 ## 更新日志
 
+2023-01-30
+
+- 切换puppet为wechat4u，减少安装时的报错
+
 2022-07-15
 
 - 升级Wechaty 到1.x，支持UOS协议
